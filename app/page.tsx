@@ -1,0 +1,261 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+const projects = [
+  {
+    id: "bidvora",
+    number: "01",
+    name: "Bidvora",
+    title: "AI-powered Bid Platform",
+    platform: "Web",
+    role: "Product strategy · UX/UI · Design system",
+    description:
+      "Turning a fragmented bidding workflow into one clear, intelligent workspace for discovering, qualifying and responding to opportunities.",
+    problem: "Bid teams need to evaluate dense opportunities quickly without losing the detail that determines a strong response.",
+    outcome: "A focused end-to-end experience that brings discovery, qualification and response planning into one system.",
+    visual: "bid",
+  },
+  {
+    id: "northside",
+    number: "02",
+    name: "Northside Rentals",
+    title: "Car Rental Booking Platform",
+    platform: "App / Web",
+    role: "Product design · Booking experience",
+    description:
+      "A calm, responsive booking experience that helps customers choose the right vehicle and complete a reservation with confidence.",
+    problem: "Rental choices, pricing and add-ons can make a simple booking feel unnecessarily complex.",
+    outcome: "A clearer comparison and checkout flow designed to reduce uncertainty at every decision point.",
+    visual: "rental",
+  },
+  {
+    id: "recrugo",
+    number: "03",
+    name: "Recrugo",
+    title: "AI-powered Recruitment Assistance",
+    platform: "Web",
+    role: "Product design · AI experience",
+    description:
+      "A human-centred AI assistant that helps recruitment teams move from candidate volume to meaningful decisions.",
+    problem: "Recruiters need useful signals from large candidate pools without losing context or human judgment.",
+    outcome: "An explainable review workspace that makes candidate evidence easier to scan, compare and act on.",
+    visual: "recruit",
+  },
+  {
+    id: "anceller",
+    number: "04",
+    name: "Anceller",
+    title: "Home Services Platform",
+    platform: "App",
+    role: "Product design · Mobile UX",
+    description:
+      "A trustworthy service marketplace designed around the real moments between finding help, booking a professional and completing the job.",
+    problem: "Home services require trust, availability and clear expectations before a customer is ready to book.",
+    outcome: "A guided mobile journey that makes service selection and scheduling feel dependable and direct.",
+    visual: "services",
+  },
+  {
+    id: "expert-electrical",
+    number: "05",
+    name: "Expert Electrical",
+    title: "Integrated Retailer Offers & Claim System",
+    platform: "Web",
+    role: "UX strategy · Enterprise product",
+    description:
+      "A connected operational platform that brings retailer offers, evidence and claim management into a single accountable workflow.",
+    problem: "Offer and claim operations become slow when evidence, ownership and status are spread across disconnected tools.",
+    outcome: "A structured system that improves visibility and helps teams move claims forward with fewer gaps.",
+    visual: "claims",
+  },
+];
+
+const process = [
+  ["01", "Discover", "Understand users, problems and business context."],
+  ["02", "Define", "Frame the right problem and establish priorities."],
+  ["03", "Design", "Explore, prototype and create the product experience."],
+  ["04", "Validate", "Test assumptions and refine the experience."],
+  ["05", "Ship", "Partner with engineering and bring the product to life."],
+];
+
+const capabilities = [
+  ["Product Design", "Product design", "UX design", "UI design", "Interaction design"],
+  ["Strategy", "Product strategy", "UX strategy", "Research", "Information architecture"],
+  ["Systems", "Design systems", "Prototyping", "Responsive design", "Accessibility"],
+  ["Collaboration", "Technical collaboration", "Design–engineering handoff", "Frontend understanding", "Stakeholder alignment"],
+];
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
+function ProjectVisual({ type, name }: { type: string; name: string }) {
+  return (
+    <div className={`project-visual visual-${type}`} role="img" aria-label={`${name} product interface preview`}>
+      <div className="browser-shell">
+        <div className="browser-top"><i /><i /><i /><span /></div>
+        {type === "bid" && (
+          <div className="bid-ui">
+            <aside><b>B.</b><i /><i /><i /><i /></aside>
+            <main>
+              <div className="ui-title"><div><small>OPPORTUNITY</small><strong>Digital service transformation</strong></div><em>84% match</em></div>
+              <div className="bid-grid"><section><small>AI SUMMARY</small><p>A qualified opportunity aligned with your delivery profile.</p><div className="ui-lines"><i /><i /><i /></div></section><section><small>NEXT MILESTONE</small><b>12 days</b><div className="mini-chart"><i /><i /><i /><i /><i /></div></section></div>
+            </main>
+          </div>
+        )}
+        {type === "rental" && (
+          <div className="rental-ui">
+            <header><b>northside</b><span>Fleet&nbsp;&nbsp; Bookings&nbsp;&nbsp; Support</span></header>
+            <div className="rental-copy"><small>READY WHEN YOU ARE</small><strong>Find your drive.</strong><p>Pick up <b>Dubai Marina</b> · 14 Aug</p></div>
+            <div className="car-shape"><i /><i /><i /></div>
+            <div className="booking-bar"><span><small>VEHICLE</small>SUV</span><span><small>DURATION</small>4 days</span><button>View 12 cars</button></div>
+          </div>
+        )}
+        {type === "recruit" && (
+          <div className="recruit-ui">
+            <header><b>recrugo</b><span>Candidate review</span><i>A</i></header>
+            <div className="candidate-layout">
+              <aside><small>SHORTLIST</small>{["Maya Patel", "Leo Bernard", "Sara Khan", "Noah Evans"].map((person, i) => <div className={i === 0 ? "active" : ""} key={person}><i>{person[0]}</i><span>{person}<small>Product Designer</small></span><em>{92 - i * 5}</em></div>)}</aside>
+              <main><small>CANDIDATE SIGNAL</small><div className="score-ring"><b>92</b><span>Strong fit</span></div><div className="signal-bars"><i /><i /><i /></div><p>Relevant systems thinking and cross-functional leadership across complex products.</p></main>
+            </div>
+          </div>
+        )}
+        {type === "services" && (
+          <div className="services-ui">
+            <div className="service-copy"><small>GOOD MORNING</small><strong>What can we help with?</strong><div className="service-grid">{["Cleaning", "Electrical", "Plumbing", "Repairs"].map((item, i) => <span key={item}><i>{["✦", "⌁", "◌", "◇"][i]}</i>{item}</span>)}</div></div>
+            <div className="phone-shell"><div className="phone-island" /><small>YOUR BOOKING</small><b>AC service</b><div className="provider"><i>AR</i><span>Ahmed R.<small>Top professional · 4.9</small></span></div><div className="appointment"><small>TODAY</small><b>2:30 PM</b></div><button>Track professional</button></div>
+          </div>
+        )}
+        {type === "claims" && (
+          <div className="claims-ui">
+            <aside><b>EE</b><span>Overview</span><span>Offers</span><span className="active">Claims</span><span>Retailers</span></aside>
+            <main><header><div><small>CLAIMS WORKSPACE</small><strong>Good morning, Aamir</strong></div><button>New claim</button></header><div className="claim-stats"><span><small>OPEN CLAIMS</small><b>128</b><i>+12 this week</i></span><span><small>APPROVAL RATE</small><b>94.2%</b><i>↑ 3.1%</i></span><span><small>VALUE PROCESSED</small><b>$84.6k</b><i>August</i></span></div><div className="claim-table"><div><b>Retailer</b><b>Offer</b><b>Value</b><b>Status</b></div>{[["Nova Retail", "Summer campaign", "$4,280", "Ready"], ["Atlas Trade", "Pro installer", "$2,940", "Review"], ["Urban Supply", "Partner growth", "$6,120", "Ready"]].map(row => <div key={row[0]}>{row.map((cell, i) => <span key={cell} className={i === 3 ? "status" : ""}>{cell}</span>)}</div>)}</div></main>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const saved = window.localStorage.getItem("portfolio-theme");
+    const shouldUseDark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDark(shouldUseDark);
+    document.documentElement.dataset.theme = shouldUseDark ? "dark" : "light";
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function toggleTheme() {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.dataset.theme = next ? "dark" : "light";
+    window.localStorage.setItem("portfolio-theme", next ? "dark" : "light");
+  }
+
+  return (
+    <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
+      <div className="nav-inner">
+        <a className="brand" href="#top" aria-label="Aamir Khan, home"><span>AK</span><b>Aamir Khan</b></a>
+        <nav className={`nav-links ${open ? "is-open" : ""}`} aria-label="Primary navigation">
+          {[["Work", "#work"], ["About", "#about"], ["Experience", "#experience"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+          <a href="/resume">Resume</a>
+        </nav>
+        <div className="nav-actions">
+          <button className="theme-toggle" onClick={toggleTheme} aria-label={`Switch to ${dark ? "light" : "dark"} mode`}><span>{dark ? "Light" : "Dark"}</span><i aria-hidden="true" /></button>
+          <button className={`menu-toggle ${open ? "is-open" : ""}`} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label="Toggle menu"><i /><i /></button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default function Home() {
+  return (
+    <main id="top">
+      <Navbar />
+      <section className="hero section-shell" aria-labelledby="hero-title">
+        <div className="hero-topline"><span>Lead Product Designer</span><span>15+ years · Product, UX & systems</span></div>
+        <div className="hero-copy">
+          <h1 id="hero-title">Aamir<br />Khan<span className="accent-dot">.</span></h1>
+          <div className="hero-intro"><p className="hero-lede">I design thoughtful digital products that balance user needs, business goals and technical realities.</p><p>Products, platforms and experiences shaped with clarity, craft and a deep understanding of how they get built.</p></div>
+        </div>
+        <div className="hero-actions">
+          <a className="button button-primary" href="#work">View case studies <Arrow /></a>
+          <a className="button button-secondary" href="/resume">View résumé</a>
+        </div>
+        <div className="hero-foot"><span>Scroll to explore</span><i /></div>
+      </section>
+
+      <section className="work-section" id="work" aria-labelledby="work-title">
+        <div className="section-heading section-shell reveal">
+          <span className="eyebrow">Selected work · 2020—2026</span>
+          <h2 id="work-title">Products made clear.</h2>
+          <p>A selection of products I&apos;ve designed across AI, SaaS, marketplaces, mobility and service platforms.</p>
+        </div>
+        <div className="projects">
+          {projects.map((project, index) => (
+            <article className={`project project-${index + 1} reveal`} id={`project-${project.id}`} key={project.name}>
+              <div className="project-inner section-shell">
+                <div className="project-content">
+                  <div className="project-index"><span>{project.number}</span><span>{project.platform}</span></div>
+                  <h3>{project.name}</h3>
+                  <p className="project-title">{project.title}</p>
+                  <p className="project-description">{project.description}</p>
+                  <p className="project-role"><span>My role</span>{project.role}</p>
+                  <details className="case-details">
+                    <summary>View case study <Arrow /></summary>
+                    <div><p><span>The challenge</span>{project.problem}</p><p><span>The direction</span>{project.outcome}</p></div>
+                  </details>
+                </div>
+                <ProjectVisual type={project.visual} name={project.name} />
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="impact section-shell reveal" aria-labelledby="impact-title">
+        <div className="impact-heading"><span className="eyebrow">Experience in numbers</span><h2 id="impact-title">Depth, not decoration.</h2><p>Experience across product design, UX strategy, design systems and technical collaboration.</p></div>
+        <div className="stats"><div><b>15+</b><span>Years</span></div><div><b>200+</b><span>Products</span></div><div><b>5+</b><span>Products led</span></div><div><b>$0.2M</b><span>Revenue impacted</span></div></div>
+      </section>
+
+      <section className="process-section reveal" aria-labelledby="process-title">
+        <div className="section-shell"><div className="section-heading compact"><span className="eyebrow">Method, not ceremony</span><h2 id="process-title">How I work.</h2></div><div className="process-grid">{process.map(([number, title, copy], index) => <article key={title}><div><span>{number}</span>{index < process.length - 1 && <i aria-hidden="true">→</i>}</div><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
+      </section>
+
+      <section className="capabilities section-shell reveal" aria-labelledby="capabilities-title">
+        <div className="section-heading compact"><span className="eyebrow">Capabilities</span><h2 id="capabilities-title">From problem to product.</h2></div>
+        <div className="capability-grid">{capabilities.map(([title, ...items], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><ul>{items.map(item => <li key={item}>{item}</li>)}</ul></article>)}</div>
+      </section>
+
+      <section className="tech-section reveal" aria-labelledby="tech-title">
+        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><p className="tech-list">React <i>·</i> Next.js <i>·</i> TypeScript <i>·</i> JavaScript <i>·</i> HTML <i>·</i> CSS <i>·</i> Tailwind <i>·</i> Git <i>·</i> Figma</p></div></div>
+      </section>
+
+      <section className="experience section-shell reveal" id="experience" aria-labelledby="experience-title">
+        <div className="section-heading compact"><span className="eyebrow">Experience</span><h2 id="experience-title">Leadership through clarity.</h2></div>
+        <article className="experience-row"><div className="experience-number">01</div><div><h3>Core Techies India</h3><p>UX Team Lead</p></div><p className="experience-copy">Leading product design across complex digital platforms—from product framing and experience strategy to design direction, systems and engineering collaboration. Helping teams turn ambiguity into focused, shippable product outcomes.</p><span className="experience-tag">Product leadership</span></article>
+      </section>
+
+      <section className="about reveal" id="about" aria-labelledby="about-title">
+        <div className="section-shell about-layout"><div><span className="eyebrow">About</span><h2 id="about-title">A little<br />about me<span className="accent-dot">.</span></h2></div><div className="about-copy"><p>I&apos;m Aamir Khan, a Lead Product Designer with 15+ years of experience designing digital products and experiences.</p><p>My work sits at the intersection of user experience, visual design, product thinking and technology. I&apos;ve worked across web and mobile products, SaaS platforms, AI-powered products, marketplaces and service platforms.</p><p>I enjoy simplifying complex problems, creating scalable design systems and partnering closely with engineering teams to turn ideas into meaningful products.</p><a className="text-link" href="/resume">More about me <Arrow /></a></div></div>
+      </section>
+
+      <section className="closing section-shell reveal" id="contact" aria-labelledby="contact-title">
+        <span className="eyebrow">Have a product, problem or idea worth solving?</span>
+        <h2 id="contact-title">Let&apos;s build<br />something meaningful<span className="accent-dot">.</span></h2>
+        <a className="button button-primary button-large" href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Get in touch <Arrow /></a>
+      </section>
+
+      <footer><div className="section-shell"><p>Aamir Khan © 2026</p><p className="availability"><i /> Available for selected opportunities</p><nav aria-label="Footer navigation"><a href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Email</a><a href="/resume">Résumé</a><a href="#top">Back to top ↑</a></nav></div></footer>
+    </main>
+  );
+}
