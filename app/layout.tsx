@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
+
+const themeInitScript = `(() => {
+  try {
+    const saved = localStorage.getItem("portfolio-theme");
+    const theme = saved === "dark" || saved === "light"
+      ? saved
+      : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.dataset.theme = theme;
+  } catch (_) {}
+})();`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -11,18 +22,23 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase,
     title: "Aamir Khan — Lead Product Designer",
-    description: "Aamir Khan is a Lead Product Designer with 15+ years of experience designing digital products, AI-powered platforms, SaaS experiences and scalable design systems.",
+    description: "Aamir Khan is a Lead Product Designer with 12+ years of experience designing digital products, AI-powered platforms, SaaS experiences and scalable design systems.",
     icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
     openGraph: {
       type: "website",
       title: "Aamir Khan — Lead Product Designer",
-      description: "15+ years designing thoughtful digital products, platforms and experiences.",
+      description: "12+ years designing thoughtful digital products, platforms and experiences.",
       images: [{ url: "/og.png", width: 1734, height: 907, alt: "Aamir Khan, Lead Product Designer" }],
     },
-    twitter: { card: "summary_large_image", title: "Aamir Khan — Lead Product Designer", description: "15+ years designing thoughtful digital products, platforms and experiences.", images: ["/og.png"] },
+    twitter: { card: "summary_large_image", title: "Aamir Khan — Lead Product Designer", description: "12+ years designing thoughtful digital products, platforms and experiences.", images: ["/og.png"] },
   };
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" suppressHydrationWarning><body>{children}</body></html>;
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: themeInitScript }} /></head>
+      <body><ThemeProvider>{children}</ThemeProvider></body>
+    </html>
+  );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useTheme } from "./components/ThemeProvider";
 
 const projects = [
   {
@@ -97,6 +98,13 @@ const capabilities = [
   ["Collaboration", "Technical collaboration", "Design–engineering handoff", "Frontend understanding", "Stakeholder alignment"],
 ];
 
+const experienceRoles = [
+  "Lead Product Designer (UX/UI)",
+  "UX Team Lead",
+  "Sr. UX Developer",
+  "Project Engineer",
+];
+
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
@@ -151,37 +159,22 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const saved = window.localStorage.getItem("portfolio-theme");
-    const shouldUseDark = saved === "dark";
-    setDark(shouldUseDark);
-    document.documentElement.dataset.theme = shouldUseDark ? "dark" : "light";
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { theme, selectTheme } = useTheme();
 
   function toggleTheme() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.dataset.theme = next ? "dark" : "light";
-    window.localStorage.setItem("portfolio-theme", next ? "dark" : "light");
+    selectTheme(theme === "dark" ? "light" : "dark");
   }
 
   return (
-    <header className={`navbar ${scrolled ? "is-scrolled" : ""}`}>
+    <header className="navbar is-scrolled">
       <div className="nav-inner">
-        <a className="brand" href="#top" aria-label="Aamir Khan, home"><span>AK</span><b>Aamir Khan</b></a>
+        <a className="brand" href="#top" aria-label="Aamir Khan, home"><span><img className="brand-logo-light" src="/logo-icon-black.svg" alt="" /><img className="brand-logo-dark" src="/logo-icon-white.svg" alt="" /></span><b>Aamir Khan</b></a>
         <nav className={`nav-links ${open ? "is-open" : ""}`} aria-label="Primary navigation">
           {[["Work", "#work"], ["About", "#about"], ["Experience", "#experience"], ["Contact", "#contact"]].map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}
           <a href="/resume">Resume</a>
         </nav>
         <div className="nav-actions">
-          <button className="theme-toggle" onClick={toggleTheme} aria-label={`Switch to ${dark ? "light" : "dark"} mode`}><span>{dark ? "Light" : "Dark"}</span><i aria-hidden="true" /></button>
+          <button className="theme-toggle" onClick={toggleTheme} aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}><i aria-hidden="true" /></button>
           <button className={`menu-toggle ${open ? "is-open" : ""}`} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label="Toggle menu"><i /><i /></button>
         </div>
       </div>
@@ -261,7 +254,7 @@ export default function Home() {
     <main id="top">
       <Navbar />
       <section className="hero section-shell" aria-labelledby="hero-title">
-        <div className="hero-topline"><span>Lead Product Designer</span><span>15+ years · Product, UX & systems</span></div>
+        <div className="hero-topline"><span>Lead Product Designer</span><span>12+ years · Product, UX & systems</span></div>
         <div className="hero-copy">
           <h1 id="hero-title">Aamir<br />Khan<span className="accent-dot">.</span></h1>
           <div className="hero-intro"><p className="hero-lede">I design thoughtful digital products that balance user needs, business goals and technical realities.</p><p>Products, platforms and experiences shaped with clarity, craft and a deep understanding of how they get built.</p></div>
@@ -276,7 +269,7 @@ export default function Home() {
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-heading section-shell reveal">
           <span className="eyebrow">Selected work · 2020—2026</span>
-          <h2 id="work-title">Products made clear.</h2>
+          <h2 id="work-title">Products made clear<span className="accent-dot">.</span></h2>
           <p>A selection of products I&apos;ve designed across AI, SaaS, marketplaces, mobility and service platforms.</p>
         </div>
         <div className="project-tabs-shell section-shell">
@@ -314,16 +307,21 @@ export default function Home() {
       </section>
 
       <section className="impact section-shell reveal" aria-labelledby="impact-title">
-        <div className="impact-heading"><span className="eyebrow">Experience in numbers</span><h2 id="impact-title">Depth, not decoration.</h2><p>Experience across product design, UX strategy, design systems and technical collaboration.</p></div>
-        <div className="stats"><div><b>15+</b><span>Years</span></div><div><b>200+</b><span>Products</span></div><div><b>5+</b><span>Products led</span></div><div><b>$0.2M</b><span>Revenue impacted</span></div></div>
+        <div className="impact-heading"><span className="eyebrow">Experience in numbers</span><h2 id="impact-title">Depth, not decoration<span className="accent-dot">.</span></h2><p>Experience across product design, UX strategy, design systems and technical collaboration.</p></div>
+        <div className="stats">
+          <div><b>200+</b><strong>Projects</strong><span>Across web, mobile &amp; platforms</span></div>
+          <div><b>12+</b><strong>Years of Experience</strong><span>In product, UX &amp; UI design</span></div>
+          <div><b>5+</b><strong>In-house Products Led</strong><span>From strategy through launch</span></div>
+          <div><b>$2.0M+</b><strong>Revenue Impacted</strong><span>Creating measurable business value</span></div>
+        </div>
       </section>
 
       <section className="process-section reveal" aria-labelledby="process-title">
-        <div className="section-shell"><div className="section-heading compact"><span className="eyebrow">Method, not ceremony</span><h2 id="process-title">How I work.</h2></div><div className="process-grid">{process.map(([number, title, copy], index) => <article key={title}><div><span>{number}</span>{index < process.length - 1 && <i aria-hidden="true">→</i>}</div><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
+        <div className="section-shell"><div className="section-heading compact"><span className="eyebrow">Method, not ceremony</span><h2 id="process-title">How I work<span className="accent-dot">.</span></h2></div><div className="process-grid">{process.map(([number, title, copy], index) => <article key={title}><div><span>{number}</span>{index < process.length - 1 && <i aria-hidden="true">→</i>}</div><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
       </section>
 
       <section className="capabilities section-shell reveal" aria-labelledby="capabilities-title">
-        <div className="section-heading compact"><span className="eyebrow">Capabilities</span><h2 id="capabilities-title">From problem to product.</h2></div>
+        <div className="section-heading compact"><span className="eyebrow">Capabilities</span><h2 id="capabilities-title">From problem to product<span className="accent-dot">.</span></h2></div>
         <div className="capability-grid">{capabilities.map(([title, ...items], index) => <article key={title}><span>0{index + 1}</span><h3>{title}</h3><ul>{items.map(item => <li key={item}>{item}</li>)}</ul></article>)}</div>
       </section>
 
@@ -332,12 +330,21 @@ export default function Home() {
       </section>
 
       <section className="experience section-shell reveal" id="experience" aria-labelledby="experience-title">
-        <div className="section-heading compact"><span className="eyebrow">Experience</span><h2 id="experience-title">Leadership through clarity.</h2></div>
-        <article className="experience-row"><div className="experience-number">01</div><div><h3>Core Techies India</h3><p>UX Team Lead</p></div><p className="experience-copy">Leading product design across complex digital platforms—from product framing and experience strategy to design direction, systems and engineering collaboration. Helping teams turn ambiguity into focused, shippable product outcomes.</p><span className="experience-tag">Product leadership</span></article>
+        <div className="section-heading compact"><span className="eyebrow">Experience</span><h2 id="experience-title">Leadership through clarity<span className="accent-dot">.</span></h2></div>
+        <div className="experience-list">
+          {experienceRoles.map((role, index) => (
+            <article className="experience-row" key={role}>
+              <div className="experience-number">{String(index + 1).padStart(2, "0")}</div>
+              <div><h3>{role}</h3></div>
+              <p className="experience-copy">Core Techies India</p>
+              <span className="experience-tag">{index === 0 ? "Current role" : "Previous role"}</span>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="about reveal" id="about" aria-labelledby="about-title">
-        <div className="section-shell about-layout"><div><span className="eyebrow">About</span><h2 id="about-title">A little<br />about me<span className="accent-dot">.</span></h2></div><div className="about-copy"><p>I&apos;m Aamir Khan, a Lead Product Designer with 15+ years of experience designing digital products and experiences.</p><p>My work sits at the intersection of user experience, visual design, product thinking and technology. I&apos;ve worked across web and mobile products, SaaS platforms, AI-powered products, marketplaces and service platforms.</p><p>I enjoy simplifying complex problems, creating scalable design systems and partnering closely with engineering teams to turn ideas into meaningful products.</p><a className="text-link" href="/resume">More about me <Arrow /></a></div></div>
+        <div className="section-shell about-layout"><div><span className="eyebrow">About</span><h2 id="about-title">A little<br />about me<span className="accent-dot">.</span></h2></div><div className="about-copy"><p>I&apos;m Aamir Khan, a Lead Product Designer with 12+ years of experience designing digital products and experiences.</p><p>My work sits at the intersection of user experience, visual design, product thinking and technology. I&apos;ve worked across web and mobile products, SaaS platforms, AI-powered products, marketplaces and service platforms.</p><p>I enjoy simplifying complex problems, creating scalable design systems and partnering closely with engineering teams to turn ideas into meaningful products.</p><a className="text-link" href="/resume">More about me <Arrow /></a></div></div>
       </section>
 
       <section className="closing section-shell reveal" id="contact" aria-labelledby="contact-title">
