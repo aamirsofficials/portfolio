@@ -253,6 +253,7 @@ export default function Home() {
   return (
     <main id="top">
       <Navbar />
+      <div className="hero-scroll-stage">
       <section className="hero section-shell" aria-labelledby="hero-title">
         <div className="hero-topline"><span>Lead Product Designer</span><span>12+ years · Product, UX & systems</span></div>
         <div className="hero-copy">
@@ -265,6 +266,19 @@ export default function Home() {
         </div>
         <div className="hero-foot"><span>Scroll to explore</span><i /></div>
       </section>
+
+      <div className="hero-overlay-section">
+        <section className="impact section-shell reveal" aria-labelledby="impact-title">
+          <div className="impact-heading"><span className="eyebrow">Experience in numbers</span><h2 id="impact-title">Depth, not decoration<span className="accent-dot">.</span></h2><p>Experience across product design, UX strategy, design systems and technical collaboration.</p></div>
+          <div className="stats">
+            <div><b>200+</b><strong>Projects</strong><span>Across web, mobile &amp; platforms</span></div>
+            <div><b>12+</b><strong>Years of Experience</strong><span>In product, UX &amp; UI design</span></div>
+            <div><b>5+</b><strong>In-house Products Led</strong><span>From strategy through launch</span></div>
+            <div><b>$2.0M+</b><strong>Revenue Impacted</strong><span>Creating measurable business value</span></div>
+          </div>
+        </section>
+      </div>
+      </div>
 
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-heading section-shell reveal">
@@ -306,16 +320,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="impact section-shell reveal" aria-labelledby="impact-title">
-        <div className="impact-heading"><span className="eyebrow">Experience in numbers</span><h2 id="impact-title">Depth, not decoration<span className="accent-dot">.</span></h2><p>Experience across product design, UX strategy, design systems and technical collaboration.</p></div>
-        <div className="stats">
-          <div><b>200+</b><strong>Projects</strong><span>Across web, mobile &amp; platforms</span></div>
-          <div><b>12+</b><strong>Years of Experience</strong><span>In product, UX &amp; UI design</span></div>
-          <div><b>5+</b><strong>In-house Products Led</strong><span>From strategy through launch</span></div>
-          <div><b>$2.0M+</b><strong>Revenue Impacted</strong><span>Creating measurable business value</span></div>
-        </div>
-      </section>
-
       <section className="process-section reveal" aria-labelledby="process-title">
         <div className="section-shell"><div className="section-heading compact"><span className="eyebrow">Method, not ceremony</span><h2 id="process-title">How I work<span className="accent-dot">.</span></h2></div><div className="process-grid">{process.map(([number, title, copy], index) => <article key={title}><div><span>{number}</span>{index < process.length - 1 && <i aria-hidden="true">→</i>}</div><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
       </section>
@@ -353,7 +357,7 @@ export default function Home() {
         <a className="button button-primary button-large" href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Get in touch <Arrow /></a>
       </section>
 
-      <footer><div className="section-shell"><p>Aamir Khan © 2026</p><p className="availability"><i /> Available for selected opportunities</p><nav aria-label="Footer navigation"><a href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Email</a><a href="/resume">Résumé</a><a href="#top">Back to top ↑</a></nav></div></footer>
+      <footer><div className="section-shell"><p>Aamir Khan © 2026</p><p className="availability"><i /> Available for remote/hybrid/onsite opportunities</p><nav aria-label="Footer navigation"><a href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Email</a><a href="/resume">Résumé</a><a href="#top">Back to top ↑</a></nav></div></footer>
     </main>
   );
 }
