@@ -1,5 +1,6 @@
 import vinext from "vinext";
 import { defineConfig } from "vite";
+import { resolve } from "node:path";
 import hostingConfig from "./.openai/hosting.json";
 import { sites } from "./build/sites-vite-plugin";
 
@@ -39,6 +40,20 @@ export default defineConfig(async () => {
   process.env.WRANGLER_WRITE_LOGS ??= "false";
   process.env.WRANGLER_LOG_PATH ??= ".wrangler/logs";
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
+
+  // The Vinext dependency tree currently includes an older Windows workerd
+  // binary that cannot launch on newer Windows builds. Prefer the compatible
+  // root binary that is pinned by this project for local development.
+  if (process.platform === "win32") {
+    process.env.MINIFLARE_WORKERD_PATH ??= resolve(
+      process.cwd(),
+      "node_modules",
+      "@cloudflare",
+      "workerd-windows-64",
+      "bin",
+      "workerd.exe",
+    );
+  }
 
   // Wrangler snapshots its log path while the Cloudflare plugin is imported.
   const { cloudflare } = await import("@cloudflare/vite-plugin");

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const projects = [
   {
@@ -10,6 +10,8 @@ const projects = [
     title: "AI-powered Bid Platform",
     platform: "Web",
     role: "Product strategy · UX/UI · Design system",
+    tags: ["AI", "B2B SaaS", "Product Strategy", "UX/UI", "Design System"],
+    categories: ["UX/UI", "Branding"],
     description:
       "Turning a fragmented bidding workflow into one clear, intelligent workspace for discovering, qualifying and responding to opportunities.",
     problem: "Bid teams need to evaluate dense opportunities quickly without losing the detail that determines a strong response.",
@@ -23,6 +25,8 @@ const projects = [
     title: "Car Rental Booking Platform",
     platform: "App / Web",
     role: "Product design · Booking experience",
+    tags: ["Mobility", "B2C", "Booking", "Responsive", "UX/UI"],
+    categories: ["UX/UI", "Marketing"],
     description:
       "A calm, responsive booking experience that helps customers choose the right vehicle and complete a reservation with confidence.",
     problem: "Rental choices, pricing and add-ons can make a simple booking feel unnecessarily complex.",
@@ -36,6 +40,8 @@ const projects = [
     title: "AI-powered Recruitment Assistance",
     platform: "Web",
     role: "Product design · AI experience",
+    tags: ["AI", "Recruitment", "B2B SaaS", "Product Design", "Research"],
+    categories: ["UX/UI", "Branding"],
     description:
       "A human-centred AI assistant that helps recruitment teams move from candidate volume to meaningful decisions.",
     problem: "Recruiters need useful signals from large candidate pools without losing context or human judgment.",
@@ -49,6 +55,8 @@ const projects = [
     title: "Home Services Platform",
     platform: "App",
     role: "Product design · Mobile UX",
+    tags: ["Marketplace", "Mobile App", "Home Services", "UX/UI", "Prototyping"],
+    categories: ["UX/UI", "Marketing"],
     description:
       "A trustworthy service marketplace designed around the real moments between finding help, booking a professional and completing the job.",
     problem: "Home services require trust, availability and clear expectations before a customer is ready to book.",
@@ -62,6 +70,8 @@ const projects = [
     title: "Integrated Retailer Offers & Claim System",
     platform: "Web",
     role: "UX strategy · Enterprise product",
+    tags: ["Enterprise", "Retail", "Claims", "UX Strategy", "Design System"],
+    categories: ["UX/UI", "Logos"],
     description:
       "A connected operational platform that brings retailer offers, evidence and claim management into a single accountable workflow.",
     problem: "Offer and claim operations become slow when evidence, ownership and status are spread across disconnected tools.",
@@ -69,6 +79,8 @@ const projects = [
     visual: "claims",
   },
 ];
+
+const projectTabs = ["UX/UI", "Branding", "Logos", "Marketing"] as const;
 
 const process = [
   ["01", "Discover", "Understand users, problems and business context."],
@@ -144,7 +156,7 @@ function Navbar() {
 
   useEffect(() => {
     const saved = window.localStorage.getItem("portfolio-theme");
-    const shouldUseDark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldUseDark = saved === "dark";
     setDark(shouldUseDark);
     document.documentElement.dataset.theme = shouldUseDark ? "dark" : "light";
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -178,6 +190,73 @@ function Navbar() {
 }
 
 export default function Home() {
+  const projectsRef = useRef<HTMLDivElement>(null);
+  const projectTabsRef = useRef<HTMLDivElement>(null);
+  const tabSwitchTimerRef = useRef<number | null>(null);
+  const [activeProjectTab, setActiveProjectTab] = useState<(typeof projectTabs)[number]>("UX/UI");
+  const [displayedProjectTab, setDisplayedProjectTab] = useState<(typeof projectTabs)[number]>("UX/UI");
+  const [projectsChanging, setProjectsChanging] = useState(false);
+  const visibleProjects = projects.filter(project => project.categories.includes(displayedProjectTab));
+
+  useEffect(() => {
+    projectsRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+  }, [displayedProjectTab]);
+
+  useEffect(() => () => {
+    if (tabSwitchTimerRef.current !== null) window.clearTimeout(tabSwitchTimerRef.current);
+  }, []);
+
+  useLayoutEffect(() => {
+    const tablist = projectTabsRef.current;
+    const activeTab = tablist?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!tablist || !activeTab) return;
+
+    const updateIndicator = () => {
+      tablist.style.setProperty("--tab-indicator-left", `${activeTab.offsetLeft}px`);
+      tablist.style.setProperty("--tab-indicator-width", `${activeTab.offsetWidth}px`);
+      tablist.classList.add("is-ready");
+    };
+
+    updateIndicator();
+    const resizeObserver = new ResizeObserver(updateIndicator);
+    resizeObserver.observe(tablist);
+    return () => resizeObserver.disconnect();
+  }, [activeProjectTab]);
+
+  function selectProjectTab(tab: (typeof projectTabs)[number]) {
+    if (tab === activeProjectTab) return;
+    if (tabSwitchTimerRef.current !== null) window.clearTimeout(tabSwitchTimerRef.current);
+    setActiveProjectTab(tab);
+    setProjectsChanging(true);
+    const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 180;
+    tabSwitchTimerRef.current = window.setTimeout(() => {
+      setDisplayedProjectTab(tab);
+      setProjectsChanging(false);
+      tabSwitchTimerRef.current = null;
+    }, delay);
+  }
+
+  function handleProjectTabKeyDown(event: React.KeyboardEvent<HTMLButtonElement>, index: number) {
+    let nextIndex = index;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % projectTabs.length;
+    else if (event.key === "ArrowLeft") nextIndex = (index - 1 + projectTabs.length) % projectTabs.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = projectTabs.length - 1;
+    else return;
+    event.preventDefault();
+    const nextTab = projectTabs[nextIndex];
+    selectProjectTab(nextTab);
+    projectTabsRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[nextIndex]?.focus();
+  }
+
+  function scrollProjects(direction: -1 | 1) {
+    const track = projectsRef.current;
+    const card = track?.querySelector<HTMLElement>(".project");
+    if (!track || !card) return;
+    const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap) || 0;
+    track.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: "smooth" });
+  }
+
   return (
     <main id="top">
       <Navbar />
@@ -200,15 +279,23 @@ export default function Home() {
           <h2 id="work-title">Products made clear.</h2>
           <p>A selection of products I&apos;ve designed across AI, SaaS, marketplaces, mobility and service platforms.</p>
         </div>
-        <div className="projects">
-          {projects.map((project, index) => (
+        <div className="project-tabs-shell section-shell">
+          <div className="project-tabs" ref={projectTabsRef} role="tablist" aria-label="Filter selected projects">
+            <span className="project-tab-indicator" aria-hidden="true" />
+            {projectTabs.map((tab, index) => (
+              <button key={tab} id={`project-tab-${tab.toLowerCase().replace(/[^a-z]+/g, "-")}`} type="button" role="tab" aria-selected={activeProjectTab === tab} aria-controls="project-panel" tabIndex={activeProjectTab === tab ? 0 : -1} className={activeProjectTab === tab ? "is-active" : ""} onClick={() => selectProjectTab(tab)} onKeyDown={event => handleProjectTabKeyDown(event, index)}>{tab}</button>
+            ))}
+          </div>
+        </div>
+        <div className={`projects ${projectsChanging ? "is-changing" : ""}`} key={displayedProjectTab} id="project-panel" role="tabpanel" aria-labelledby={`project-tab-${activeProjectTab.toLowerCase().replace(/[^a-z]+/g, "-")}`} ref={projectsRef} tabIndex={0}>
+          {visibleProjects.map((project, index) => (
             <article className={`project project-${index + 1} reveal`} id={`project-${project.id}`} key={project.name}>
-              <div className="project-inner section-shell">
+              <div className="project-inner">
                 <div className="project-content">
-                  <div className="project-index"><span>{project.number}</span><span>{project.platform}</span></div>
-                  <h3>{project.name}</h3>
-                  <p className="project-title">{project.title}</p>
+                  <div className="project-index"><span>{project.name}</span><span>{project.number} / {project.platform}</span></div>
+                  <h3>{project.title}</h3>
                   <p className="project-description">{project.description}</p>
+                  <ul className="project-tags" aria-label={`${project.name} disciplines`}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
                   <p className="project-role"><span>My role</span>{project.role}</p>
                   <details className="case-details">
                     <summary>View case study <Arrow /></summary>
@@ -219,6 +306,10 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="project-controls section-shell" aria-label="Project carousel controls">
+          <button type="button" onClick={() => scrollProjects(-1)} aria-label="Previous project" disabled={visibleProjects.length < 2}>←</button>
+          <button type="button" onClick={() => scrollProjects(1)} aria-label="Next project" disabled={visibleProjects.length < 2}>→</button>
         </div>
       </section>
 
