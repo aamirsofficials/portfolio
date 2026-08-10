@@ -357,7 +357,7 @@ export default function Home() {
         <a className="button button-primary button-large" href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Get in touch <Arrow /></a>
       </section>
 
-      <footer><div className="section-shell"><p>Aamir Khan © 2026</p><p className="availability"><i /> Available for remote/hybrid/onsite opportunities</p><nav aria-label="Footer navigation"><a href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Email</a><a href="/resume">Résumé</a><a href="#top">Back to top ↑</a></nav></div></footer>
+      <footer><div className="section-shell"><p>Aamir Khan © 2026</p><p className="availability"><i /> Available for remote/hybrid/onsite opportunities</p><nav aria-label="Footer navigation"><a href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Email</a><details className="footer-more"><summary>More <span aria-hidden="true">↑</span></summary><div className="footer-dropup"><a href="/for-hirer">For Hirer <span aria-hidden="true">↗</span></a></div></details><a href="#top">Back to top ↑</a></nav></div></footer>
     </main>
   );
 }
