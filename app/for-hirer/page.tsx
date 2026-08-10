@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { RemoteReadinessSection } from "../components/RemoteReadinessSection";
+import { SeeMeAsSection } from "../components/SeeMeAsSection";
 
 export const metadata: Metadata = {
   title: "For Hirers — Aamir Khan",
@@ -14,6 +15,7 @@ export default function ForHirerPage() {
         <a href="/resume">Résumé</a>
       </nav>
       <RemoteReadinessSection />
+      <SeeMeAsSection />
       <section className="for-hirer-contact section-shell" aria-labelledby="for-hirer-contact-title">
         <span className="eyebrow">Start a conversation</span>
         <h2 id="for-hirer-contact-title">Looking for a product design lead?</h2>

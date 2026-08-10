@@ -63,7 +63,9 @@ export function RemoteReadinessSection() {
           <p>I have the right environment, tools, and setup to deliver high-quality work consistently—no matter where I work from.</p>
         </div>
         <div className="remote-readiness-grid">
-          <article className="remote-readiness-card remote-readiness-card--reserved" aria-label="Reserved feature card">
+          <article className="remote-readiness-card remote-readiness-card--reserved">
+            <span className="remote-readiness-feature-label">Flexible collaboration</span>
+            <h3>12+ years of experience across <span className="remote-readiness-accent">onsite</span> and <span className="remote-readiness-accent">remote</span> teams.</h3>
             <span className="remote-readiness-plus" aria-hidden="true">+</span>
           </article>
           {remoteReadinessItems.map(item => (
@@ -78,4 +80,3 @@ export function RemoteReadinessSection() {
     </section>
   );
 }
-
