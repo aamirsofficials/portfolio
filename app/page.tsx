@@ -54,6 +54,8 @@ const projects = [
     problem: "Rental choices, pricing and add-ons can make a simple booking feel unnecessarily complex.",
     outcome: "A clearer comparison and checkout flow designed to reduce uncertainty at every decision point.",
     visual: "rental",
+    caseStudy: "/work/car-rental",
+    actionLabel: "Read case study",
   },
   {
     id: "recrugo",
@@ -153,13 +155,7 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
       <div className="browser-shell">
         <div className="browser-top"><i /><i /><i /><span /></div>
         {type === "bid" && (
-          <div className="bid-ui">
-            <aside><b>B.</b><i /><i /><i /><i /></aside>
-            <main>
-              <div className="ui-title"><div><small>OPPORTUNITY</small><strong>Digital service transformation</strong></div><em>84% match</em></div>
-              <div className="bid-grid"><section><small>AI SUMMARY</small><p>A qualified opportunity aligned with your delivery profile.</p><div className="ui-lines"><i /><i /><i /></div></section><section><small>NEXT MILESTONE</small><b>12 days</b><div className="mini-chart"><i /><i /><i /><i /><i /></div></section></div>
-            </main>
-          </div>
+          <div className="bid-ui"><div className="bid-dashboard" /></div>
         )}
         {type === "medicine" && (
           <div className="medicine-ui"><div className="medicine-preview" /></div>

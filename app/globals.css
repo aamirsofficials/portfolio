@@ -204,25 +204,8 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .project-controls button:hover { transform: translateY(-2px); background: var(--ink); color: var(--paper); }
 .project-controls button:disabled { opacity: .35; cursor: default; transform: none; }
 
-.bid-ui { display: grid; grid-template-columns: 12% 1fr; height: calc(100% - 26px); background: #101114; color: #f7f7f8; }
-.bid-ui aside { padding-top: 17px; display: flex; flex-direction: column; align-items: center; gap: 18px; border-right: 1px solid #292b31; }
-.bid-ui aside b { color: #c19a6b; font-size: 16px; }
-.bid-ui aside i { width: 12px; height: 2px; background: #5e626b; }
-.bid-ui main { padding: 8%; }
-.ui-title { display: flex; justify-content: space-between; align-items: flex-start; }
-.ui-title small, .bid-grid small { display: block; color: #7d8491; font-size: 7px; letter-spacing: .08em; }
-.ui-title strong { display: block; margin-top: 6px; font-size: clamp(10px, 1.1vw, 16px); font-weight: 500; }
-.ui-title em { padding: 5px 7px; border-radius: 10px; background: #3b2f22; color: #d9ba91; font-size: 8px; font-style: normal; }
-.bid-grid { display: grid; grid-template-columns: 1.35fr .65fr; gap: 8px; margin-top: 9%; }
-.bid-grid section { min-height: 120px; padding: 12%; border: 1px solid #292b31; background: #17181c; }
-.bid-grid p { color: #d0d1d5; font-size: clamp(8px, .85vw, 12px); line-height: 1.45; }
-.bid-grid b { display: block; margin-top: 12px; font-size: clamp(18px, 2.1vw, 32px); font-weight: 450; }
-.ui-lines { display: grid; gap: 7px; margin-top: 16px; }
-.ui-lines i { width: 100%; height: 2px; background: #30323a; }
-.ui-lines i:nth-child(2) { width: 72%; }
-.mini-chart { height: 40px; margin-top: 18px; display: flex; gap: 5px; align-items: end; border-bottom: 1px solid #30323a; }
-.mini-chart i { flex: 1; background: #c19a6b; }
-.mini-chart i:nth-child(1) { height: 28%; }.mini-chart i:nth-child(2) { height: 45%; }.mini-chart i:nth-child(3) { height: 38%; }.mini-chart i:nth-child(4) { height: 70%; }.mini-chart i:nth-child(5) { height: 90%; }
+.bid-ui { height: calc(100% - 26px); background: #111216; }
+.bid-dashboard { width: 100%; height: 100%; background: #111216 url("/images/projects/bidvora-dashboard.png") center / contain no-repeat; }
 
 .visual-medicine { background: linear-gradient(145deg, #e8f0ff 0%, #f5f8ff 54%, #edf8e7 100%); }
 .visual-medicine .browser-shell { background: #fff; }
