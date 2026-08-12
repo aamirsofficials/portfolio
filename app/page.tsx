@@ -5,14 +5,30 @@ import { useTheme } from "./components/ThemeProvider";
 
 const projects = [
   {
-    id: "bidvora",
+    id: "medicine-reminder",
     number: "01",
+    name: "Medicine Reminder",
+    title: "Medicine Reminder App",
+    platform: "App / Web",
+    role: "UX design · Research · Prototyping",
+    tags: ["Healthcare", "UX Research", "UX/UI", "Prototyping", "Responsive"],
+    categories: ["UX/UI"],
+    description:
+      "An accessible reminder experience that helps people remember what medicine to take, when to take it and track each dose with confidence.",
+    problem: "People can miss medication because they forget the time, the medicine or whether a dose has already been taken.",
+    outcome: "A researched and tested reminder flow spanning mobile, tablet and desktop experiences with flexible accessibility settings.",
+    visual: "medicine",
+    caseStudy: "/case-studies/medicine-reminder-case-study.pdf",
+  },
+  {
+    id: "bidvora",
+    number: "02",
     name: "Bidvora",
     title: "AI-powered Bid Platform",
     platform: "Web",
     role: "Product strategy · UX/UI · Design system",
     tags: ["AI", "B2B SaaS", "Product Strategy", "UX/UI", "Design System"],
-    categories: ["UX/UI", "Branding"],
+    categories: ["UX/UI"],
     description:
       "Turning a fragmented bidding workflow into one clear, intelligent workspace for discovering, qualifying and responding to opportunities.",
     problem: "Bid teams need to evaluate dense opportunities quickly without losing the detail that determines a strong response.",
@@ -21,7 +37,7 @@ const projects = [
   },
   {
     id: "northside",
-    number: "02",
+    number: "03",
     name: "Northside Rentals",
     title: "Car Rental Booking Platform",
     platform: "App / Web",
@@ -36,13 +52,13 @@ const projects = [
   },
   {
     id: "recrugo",
-    number: "03",
+    number: "04",
     name: "Recrugo",
     title: "AI-powered Recruitment Assistance",
     platform: "Web",
     role: "Product design · AI experience",
     tags: ["AI", "Recruitment", "B2B SaaS", "Product Design", "Research"],
-    categories: ["UX/UI", "Branding"],
+    categories: ["UX/UI"],
     description:
       "A human-centred AI assistant that helps recruitment teams move from candidate volume to meaningful decisions.",
     problem: "Recruiters need useful signals from large candidate pools without losing context or human judgment.",
@@ -51,7 +67,7 @@ const projects = [
   },
   {
     id: "anceller",
-    number: "04",
+    number: "05",
     name: "Anceller",
     title: "Home Services Platform",
     platform: "App",
@@ -66,7 +82,7 @@ const projects = [
   },
   {
     id: "expert-electrical",
-    number: "05",
+    number: "06",
     name: "Expert Electrical",
     title: "Integrated Retailer Offers & Claim System",
     platform: "Web",
@@ -78,6 +94,22 @@ const projects = [
     problem: "Offer and claim operations become slow when evidence, ownership and status are spread across disconnected tools.",
     outcome: "A structured system that improves visibility and helps teams move claims forward with fewer gaps.",
     visual: "claims",
+  },
+  {
+    id: "core-techies",
+    number: "07",
+    name: "Core Techies",
+    title: "Brand Identity & Guidelines",
+    platform: "Branding",
+    role: "Brand identity · Visual system · Brand guidelines",
+    tags: ["Brand Identity", "Logo Design", "Visual System", "Guidelines"],
+    categories: ["Branding"],
+    description:
+      "A cohesive identity system that gives Core Techies a clear, confident and consistent presence across every brand touchpoint.",
+    problem: "Core Techies needed a recognisable identity that could stay consistent across digital and physical applications.",
+    outcome: "A practical brand system covering the logo, colour, typography and usage principles for consistent execution.",
+    visual: "core-techies",
+    caseStudy: "/case-studies/core-techies-brandbook.pdf",
   },
 ];
 
@@ -123,12 +155,13 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
             </main>
           </div>
         )}
+        {type === "medicine" && (
+          <div className="medicine-ui"><div className="medicine-preview" /></div>
+        )}
         {type === "rental" && (
           <div className="rental-ui">
-            <header><b>northside</b><span>Fleet&nbsp;&nbsp; Bookings&nbsp;&nbsp; Support</span></header>
-            <div className="rental-copy"><small>READY WHEN YOU ARE</small><strong>Find your drive.</strong><p>Pick up <b>Dubai Marina</b> · 14 Aug</p></div>
-            <div className="car-shape"><i /><i /><i /></div>
-            <div className="booking-bar"><span><small>VEHICLE</small>SUV</span><span><small>DURATION</small>4 days</span><button>View 12 cars</button></div>
+            <div className="rental-phone rental-phone-home"><div className="rental-screen rental-screen-home" /></div>
+            <div className="rental-phone rental-phone-results"><div className="rental-screen rental-screen-results" /></div>
           </div>
         )}
         {type === "recruit" && (
@@ -142,14 +175,19 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
         )}
         {type === "services" && (
           <div className="services-ui">
-            <div className="service-copy"><small>GOOD MORNING</small><strong>What can we help with?</strong><div className="service-grid">{["Cleaning", "Electrical", "Plumbing", "Repairs"].map((item, i) => <span key={item}><i>{["✦", "⌁", "◌", "◇"][i]}</i>{item}</span>)}</div></div>
-            <div className="phone-shell"><div className="phone-island" /><small>YOUR BOOKING</small><b>AC service</b><div className="provider"><i>AR</i><span>Ahmed R.<small>Top professional · 4.9</small></span></div><div className="appointment"><small>TODAY</small><b>2:30 PM</b></div><button>Track professional</button></div>
+            <div className="services-phone"><div className="services-screen services-screen-home" /></div>
+            <div className="services-phone"><div className="services-screen services-screen-location" /></div>
           </div>
         )}
         {type === "claims" && (
           <div className="claims-ui">
             <aside><b>EE</b><span>Overview</span><span>Offers</span><span className="active">Claims</span><span>Retailers</span></aside>
             <main><header><div><small>CLAIMS WORKSPACE</small><strong>Good morning, Aamir</strong></div><button>New claim</button></header><div className="claim-stats"><span><small>OPEN CLAIMS</small><b>128</b><i>+12 this week</i></span><span><small>APPROVAL RATE</small><b>94.2%</b><i>↑ 3.1%</i></span><span><small>VALUE PROCESSED</small><b>$84.6k</b><i>August</i></span></div><div className="claim-table"><div><b>Retailer</b><b>Offer</b><b>Value</b><b>Status</b></div>{[["Nova Retail", "Summer campaign", "$4,280", "Ready"], ["Atlas Trade", "Pro installer", "$2,940", "Review"], ["Urban Supply", "Partner growth", "$6,120", "Ready"]].map(row => <div key={row[0]}>{row.map((cell, i) => <span key={cell} className={i === 3 ? "status" : ""}>{cell}</span>)}</div>)}</div></main>
+          </div>
+        )}
+        {type === "core-techies" && (
+          <div className="core-techies-ui">
+            <div className="core-techies-cover" />
           </div>
         )}
       </div>
@@ -304,10 +342,14 @@ export default function Home() {
                   <p className="project-description">{project.description}</p>
                   <ul className="project-tags" aria-label={`${project.name} disciplines`}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
                   <p className="project-role"><span>My role</span>{project.role}</p>
-                  <details className="case-details">
-                    <summary>View case study <Arrow /></summary>
-                    <div><p><span>The challenge</span>{project.problem}</p><p><span>The direction</span>{project.outcome}</p></div>
-                  </details>
+                  {project.caseStudy ? (
+                    <a className="case-study-link" href={project.caseStudy} target="_blank" rel="noreferrer" aria-label={`View ${project.name} case study PDF (opens in a new tab)`}>View case study <Arrow /></a>
+                  ) : (
+                    <details className="case-details">
+                      <summary>View case study <Arrow /></summary>
+                      <div><p><span>The challenge</span>{project.problem}</p><p><span>The direction</span>{project.outcome}</p></div>
+                    </details>
+                  )}
                 </div>
                 <ProjectVisual type={project.visual} name={project.name} />
               </div>
