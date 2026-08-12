@@ -163,6 +163,11 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .project:nth-child(4) { animation-delay: 135ms; }
 .project:nth-child(5) { animation-delay: 180ms; }
 @keyframes lineup-card-enter { from { opacity: 0; transform: translateY(24px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.logo-projects { gap: 24px; align-items: stretch; }
+.logo-card { box-sizing: border-box; flex: 0 0 372px; width: 372px; height: 396px; padding: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 20px; background: #fff; overflow: hidden; scroll-snap-align: center; scroll-snap-stop: always; animation: logo-card-enter .56s cubic-bezier(.22,1,.36,1) both; }
+@keyframes logo-card-enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.logo-image-frame { width: 100%; height: 100%; display: grid; place-items: center; overflow: hidden; }
+.logo-image { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; }
 .project-inner { width: 100%; height: 100%; min-height: 550px; display: grid; grid-template-columns: .86fr 1.14fr; align-items: stretch; gap: 0; border: 0; border-radius: 22px; background: var(--project-card); color: var(--project-ink); overflow: hidden; }
 .project-content { max-width: none; padding: clamp(42px, 5vw, 68px); display: flex; flex-direction: column; }
 .project-index { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 26px; color: var(--project-muted); font-family: var(--font-sans); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
@@ -306,6 +311,7 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .experience-row h3 { margin: 0; font-size: 22px; font-weight: 500; letter-spacing: -.03em; }.experience-row > div p { margin: 5px 0 0; color: var(--accent); font-size: 13px; }
 .experience-copy { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.45; letter-spacing: -.02em; }
 .experience-tag { justify-self: end; padding: 7px 10px; border: 1px solid var(--line); border-radius: 20px; color: var(--muted); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+.experience-tag.is-current { border-color: var(--accent); color: var(--accent); }
 
 .about { padding: 170px 0; background: var(--soft); }
 .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }

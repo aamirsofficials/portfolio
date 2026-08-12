@@ -95,7 +95,7 @@ const projects = [
     platform: "Web",
     role: "UX strategy · Enterprise product",
     tags: ["Enterprise", "Retail", "Claims", "UX Strategy", "Design System"],
-    categories: ["UX/UI", "Logos"],
+    categories: ["UX/UI"],
     description:
       "A connected operational platform that brings retailer offers, evidence and claim management into a single accountable workflow.",
     problem: "Offer and claim operations become slow when evidence, ownership and status are spread across disconnected tools.",
@@ -122,6 +122,22 @@ const projects = [
 ];
 
 const projectTabs = ["UX/UI", "Branding", "Logos", "Marketing"] as const;
+
+const logos = [
+  { name: "Core Techies", src: "/images/logos/core-techies.png" },
+  { name: "Laundry Cube", src: "/images/logos/laundry-cube.png" },
+  { name: "Lorrying", src: "/images/logos/lorrying.png" },
+  { name: "Recrugo", src: "/images/logos/recrugo.png" },
+  { name: "Stepout Live", src: "/images/logos/stepout-live.png" },
+  { name: "CyberAlerts", src: "/images/logos/cyberalerts.png" },
+  { name: "FreshDeal24", src: "/images/logos/freshdeal24.png" },
+  { name: "GBL", src: "/images/logos/gbl.png" },
+  { name: "Invictus Capital", src: "/images/logos/invictus-capital.png" },
+  { name: "KFU", src: "/images/logos/kfu.png" },
+  { name: "Muaven", src: "/images/logos/muaven.png" },
+  { name: "Pet Mates", src: "/images/logos/pet-mates.png" },
+  { name: "Raval Shah", src: "/images/logos/raval-shah.png" },
+] as const;
 
 const process = [
   ["01", "Discover", "Understand users, problems and business context."],
@@ -230,6 +246,7 @@ export default function Home() {
   const [displayedProjectTab, setDisplayedProjectTab] = useState<(typeof projectTabs)[number]>("UX/UI");
   const [projectsChanging, setProjectsChanging] = useState(false);
   const visibleProjects = projects.filter(project => project.categories.includes(displayedProjectTab));
+  const visibleItemCount = displayedProjectTab === "Logos" ? logos.length : visibleProjects.length;
 
   useEffect(() => {
     projectsRef.current?.scrollTo({ left: 0, behavior: "smooth" });
@@ -284,7 +301,7 @@ export default function Home() {
 
   function scrollProjects(direction: -1 | 1) {
     const track = projectsRef.current;
-    const card = track?.querySelector<HTMLElement>(".project");
+    const card = track?.querySelector<HTMLElement>(".project, .logo-card");
     if (!track || !card) return;
     const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap) || 0;
     track.scrollBy({ left: direction * (card.offsetWidth + gap), behavior: "smooth" });
@@ -334,8 +351,14 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={`projects ${projectsChanging ? "is-changing" : ""}`} key={displayedProjectTab} id="project-panel" role="tabpanel" aria-labelledby={`project-tab-${activeProjectTab.toLowerCase().replace(/[^a-z]+/g, "-")}`} ref={projectsRef} tabIndex={0}>
-          {visibleProjects.map((project, index) => (
+        <div className={`projects ${displayedProjectTab === "Logos" ? "logo-projects" : ""} ${projectsChanging ? "is-changing" : ""}`} key={displayedProjectTab} id="project-panel" role="tabpanel" aria-labelledby={`project-tab-${activeProjectTab.toLowerCase().replace(/[^a-z]+/g, "-")}`} ref={projectsRef} tabIndex={0}>
+          {displayedProjectTab === "Logos" ? logos.map((logo, index) => (
+            <article className="logo-card reveal" key={logo.name} aria-label={`${logo.name} logo`} style={{ animationDelay: `${Math.min(index, 5) * 45}ms` }}>
+              <div className="logo-image-frame">
+                <img src={logo.src} alt={`${logo.name} logo`} className="logo-image" draggable={false} />
+              </div>
+            </article>
+          )) : visibleProjects.map((project, index) => (
             <article className={`project project-${index + 1} reveal`} id={`project-${project.id}`} key={project.name}>
               <div className="project-inner">
                 <div className="project-content">
@@ -359,8 +382,8 @@ export default function Home() {
           ))}
         </div>
         <div className="project-controls section-shell" aria-label="Project carousel controls">
-          <button type="button" onClick={() => scrollProjects(-1)} aria-label="Previous project" disabled={visibleProjects.length < 2}>←</button>
-          <button type="button" onClick={() => scrollProjects(1)} aria-label="Next project" disabled={visibleProjects.length < 2}>→</button>
+          <button type="button" onClick={() => scrollProjects(-1)} aria-label="Previous project" disabled={visibleItemCount < 2}>←</button>
+          <button type="button" onClick={() => scrollProjects(1)} aria-label="Next project" disabled={visibleItemCount < 2}>→</button>
         </div>
       </section>
 
@@ -385,7 +408,7 @@ export default function Home() {
               <div className="experience-number">{String(index + 1).padStart(2, "0")}</div>
               <div><h3>{role}</h3></div>
               <p className="experience-copy">Core Techies India</p>
-              <span className="experience-tag">{index === 0 ? "Current role" : "Previous role"}</span>
+              <span className={`experience-tag ${index === 0 ? "is-current" : ""}`}>{index === 0 ? "Current role" : "Previous role"}</span>
             </article>
           ))}
         </div>
