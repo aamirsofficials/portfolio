@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTheme } from "./components/ThemeProvider";
+import PortfolioFooter from "./components/PortfolioFooter";
 
 const projects = [
   {
@@ -18,7 +19,8 @@ const projects = [
     problem: "People can miss medication because they forget the time, the medicine or whether a dose has already been taken.",
     outcome: "A researched and tested reminder flow spanning mobile, tablet and desktop experiences with flexible accessibility settings.",
     visual: "medicine",
-    caseStudy: "/case-studies/medicine-reminder-case-study.pdf",
+    caseStudy: "/work/medicine-reminder",
+    actionLabel: "Read case study",
   },
   {
     id: "bidvora",
@@ -34,6 +36,9 @@ const projects = [
     problem: "Bid teams need to evaluate dense opportunities quickly without losing the detail that determines a strong response.",
     outcome: "A focused end-to-end experience that brings discovery, qualification and response planning into one system.",
     visual: "bid",
+    caseStudy: "https://www.bidvora.app/",
+    actionLabel: "View live demo",
+    actionExternal: true,
   },
   {
     id: "northside",
@@ -110,6 +115,7 @@ const projects = [
     outcome: "A practical brand system covering the logo, colour, typography and usage principles for consistent execution.",
     visual: "core-techies",
     caseStudy: "/case-studies/core-techies-brandbook.pdf",
+    actionExternal: true,
   },
 ];
 
@@ -343,7 +349,7 @@ export default function Home() {
                   <ul className="project-tags" aria-label={`${project.name} disciplines`}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
                   <p className="project-role"><span>My role</span>{project.role}</p>
                   {project.caseStudy ? (
-                    <a className="case-study-link" href={project.caseStudy} target="_blank" rel="noreferrer" aria-label={`View ${project.name} case study PDF (opens in a new tab)`}>View case study <Arrow /></a>
+                    <a className="case-study-link" href={project.caseStudy} target={project.actionExternal ? "_blank" : undefined} rel={project.actionExternal ? "noreferrer" : undefined} aria-label={`${project.actionLabel ?? "View case study"}: ${project.name}${project.actionExternal ? " (opens in a new tab)" : ""}`}>{project.actionLabel ?? "View case study"} <Arrow /></a>
                   ) : (
                     <details className="case-details">
                       <summary>View case study <Arrow /></summary>
@@ -372,7 +378,7 @@ export default function Home() {
       </section>
 
       <section className="tech-section reveal" aria-labelledby="tech-title">
-        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><p className="tech-list">React <i>·</i> Next.js <i>·</i> TypeScript <i>·</i> JavaScript <i>·</i> HTML <i>·</i> CSS <i>·</i> Tailwind <i>·</i> Git <i>·</i> Figma</p></div></div>
+        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><p className="tech-list">React <i>·</i> Next.js <i>·</i> TypeScript <i>·</i> JavaScript <i>·</i> HTML <i>·</i> CSS <i>·</i> Tailwind <i>·</i> Git <i>·</i> Figma <i>·</i> Adobe Creative Suite <i>·</i> CorelDRAW</p></div></div>
       </section>
 
       <section className="experience section-shell reveal" id="experience" aria-labelledby="experience-title">
@@ -399,7 +405,7 @@ export default function Home() {
         <a className="button button-primary button-large" href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Get in touch <Arrow /></a>
       </section>
 
-      <footer><div className="section-shell"><p>Aamir Khan © 2026</p><p className="availability"><i /> Available for remote/hybrid/onsite opportunities</p><nav aria-label="Footer navigation"><a href="mailto:?subject=Portfolio%20enquiry%20for%20Aamir%20Khan">Email</a><details className="footer-more"><summary>More <span aria-hidden="true">↑</span></summary><div className="footer-dropup"><a href="/for-hirer">For Hirer <span aria-hidden="true">↗</span></a></div></details><a href="#top">Back to top ↑</a></nav></div></footer>
+      <PortfolioFooter />
     </main>
   );
 }

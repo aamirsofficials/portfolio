@@ -428,7 +428,8 @@ footer nav { display: flex; align-items: center; gap: 28px; } footer nav a { col
 
 .resume-page { width: min(1020px, calc(100% - 64px)); margin: auto; padding: 38px 0 80px; }
 .resume-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 32px; border-bottom: 1px solid var(--line); font-size: 13px; }
-.resume-nav button { padding: 9px 14px; border: 1px solid var(--ink); border-radius: 20px; background: transparent; cursor: pointer; }
+.resume-nav .resume-link { padding: 9px 14px; border: 1px solid var(--ink); border-radius: 20px; background: transparent; transition: background .2s ease, color .2s ease; }
+.resume-nav .resume-link:hover { background: var(--ink); color: var(--paper); }
 .resume-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; padding: 80px 0; }
 .resume-header span { color: var(--accent); font-size: 13px; }.resume-header h1 { margin: 10px 0 0; font-size: clamp(64px, 9vw, 116px); font-weight: 450; line-height: .9; letter-spacing: -.075em; }.resume-header p { margin: 0; color: var(--muted); font-size: 21px; line-height: 1.5; }
 .resume-summary, .resume-columns { border-top: 1px solid var(--line); padding: 34px 0; }.resume-summary { display: grid; grid-template-columns: .35fr 1fr; gap: 50px; }.resume-page h2 { margin: 0; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; }.resume-summary p { max-width: 720px; margin: 0; font-size: 18px; line-height: 1.65; }
