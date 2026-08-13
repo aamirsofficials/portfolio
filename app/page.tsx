@@ -198,10 +198,7 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
           </div>
         )}
         {type === "claims" && (
-          <div className="claims-ui">
-            <aside><b>EE</b><span>Overview</span><span>Offers</span><span className="active">Claims</span><span>Retailers</span></aside>
-            <main><header><div><small>CLAIMS WORKSPACE</small><strong>Good morning, Aamir</strong></div><button>New claim</button></header><div className="claim-stats"><span><small>OPEN CLAIMS</small><b>128</b><i>+12 this week</i></span><span><small>APPROVAL RATE</small><b>94.2%</b><i>↑ 3.1%</i></span><span><small>VALUE PROCESSED</small><b>$84.6k</b><i>August</i></span></div><div className="claim-table"><div><b>Retailer</b><b>Offer</b><b>Value</b><b>Status</b></div>{[["Nova Retail", "Summer campaign", "$4,280", "Ready"], ["Atlas Trade", "Pro installer", "$2,940", "Review"], ["Urban Supply", "Partner growth", "$6,120", "Ready"]].map(row => <div key={row[0]}>{row.map((cell, i) => <span key={cell} className={i === 3 ? "status" : ""}>{cell}</span>)}</div>)}</div></main>
-          </div>
+          <div className="claims-ui" />
         )}
         {type === "core-techies" && (
           <div className="core-techies-ui">

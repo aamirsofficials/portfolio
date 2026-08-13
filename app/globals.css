@@ -193,9 +193,8 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .case-study-link:focus-visible { outline: 2px solid var(--project-accent); outline-offset: 6px; border-radius: 2px; }
 
 .project-visual { min-width: 0; min-height: 100%; padding: clamp(34px, 5vw, 72px); display: grid; place-items: center; background: rgb(232 232 237 / 74%); overflow: hidden; }
-.browser-shell { width: 100%; height: min(100%, 430px); aspect-ratio: 1.28; border: 1px solid var(--project-line); border-radius: 14px; background: #fff; box-shadow: 0 32px 70px var(--project-preview-shadow); overflow: hidden; color: #1d1d1f; transform: translateZ(0) rotate(-.4deg); transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .6s; }
-.project:nth-child(even) .browser-shell { transform: translateZ(0) rotate(.4deg); }
-.project:hover .browser-shell { transform: scale(1.025) rotate(0); }
+.browser-shell { width: 100%; height: min(100%, 430px); aspect-ratio: 1.28; border: 1px solid var(--project-line); border-radius: 14px; background: #fff; box-shadow: 0 32px 70px var(--project-preview-shadow); overflow: hidden; color: #1d1d1f; transform: none; transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .6s; }
+.project:hover .browser-shell { transform: scale(1.025); }
 .browser-top { height: 26px; padding: 0 11px; display: flex; gap: 5px; align-items: center; border-bottom: 1px solid #ebebed; background: #fbfbfc; }
 .browser-top i { width: 5px; height: 5px; border-radius: 50%; background: #d2d2d7; }
 .browser-top span { width: 35%; height: 6px; margin-left: auto; margin-right: auto; border-radius: 5px; background: #f0f0f2; }
@@ -258,14 +257,13 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .services-screen-home { background-image: url("/images/projects/home-services-home.png"); }
 .services-screen-location { background-image: url("/images/projects/home-services-location.png"); }
 
-.claims-ui { height: calc(100% - 26px); display: grid; grid-template-columns: 17% 1fr; background: #fbf8f3; }
-.claims-ui > aside { padding: 16% 13%; display: flex; flex-direction: column; gap: 11%; background: #3b2f22; color: #cdb897; font-size: 6px; }
-.claims-ui > aside b { width: 24px; height: 24px; display: grid; place-items: center; background: #c19a6b; color: #3b2f22; font-size: 7px; }.claims-ui > aside .active { color: #fff; }
-.claims-ui > main { padding: 5%; }
-.claims-ui main > header { display: flex; justify-content: space-between; align-items: flex-start; }
-.claims-ui header small { display: block; color: #8f8170; font-size: 5px; letter-spacing: .08em; }.claims-ui header strong { display: block; margin-top: 4px; color: #3b2f22; font-size: clamp(10px, 1.2vw, 18px); font-weight: 500; }.claims-ui header button { padding: 6px 9px; border: 0; background: #3b2f22; color: white; font-size: 5px; }
-.claim-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 6%; }.claim-stats > span { padding: 8%; border: 1px solid #e7ddd0; background: #fff; }.claim-stats small { display: block; color: #938574; font-size: 4px; }.claim-stats b { display: block; margin-top: 4px; color: #3b2f22; font-size: clamp(10px, 1.3vw, 17px); font-weight: 500; }.claim-stats i { color: #5f8b78; font-size: 4px; font-style: normal; }
-.claim-table { margin-top: 6%; border: 1px solid #e7ddd0; background: #fff; }.claim-table > div { padding: 3%; display: grid; grid-template-columns: 1fr 1.3fr .7fr .6fr; border-bottom: 1px solid #eee7df; color: #6f6357; font-size: 5px; }.claim-table > div:first-child { color: #918578; }.claim-table > div:last-child { border: 0; }.claim-table b { font-weight: 500; }.claim-table .status { width: fit-content; padding: 2px 4px; border-radius: 8px; background: #e6f2eb; color: #47715d; }
+.visual-claims { background: linear-gradient(145deg, #fff0e7 0%, #f5f5f7 54%, #fff8f2 100%); }
+.visual-claims .browser-shell { background: #f8f9fb; }
+.claims-ui { height: calc(100% - 26px); background: #f8f9fb url("/images/projects/expert-electrical.png") center top / 100% auto no-repeat; transition: background-position 4.8s cubic-bezier(.2, .65, .25, 1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .visual-claims .browser-shell:hover .claims-ui { background-position: center bottom; }
+}
 
 .impact { padding-top: 190px; padding-bottom: 180px; }
 .impact-heading { display: block; padding-bottom: 34px; border-bottom: 1px solid var(--line); }
@@ -455,7 +453,7 @@ footer nav { display: flex; align-items: center; gap: 28px; } footer nav a { col
   .hero { min-height: 94svh; padding-top: 100px; padding-bottom: 24px; }.hero-topline span:last-child { display: none; }.hero-copy { gap: 42px; padding: 54px 0 34px; }.hero h1 { font-size: clamp(72px, 24vw, 102px); }.hero-intro .hero-lede { font-size: 24px; }.hero-intro p { font-size: 15px; }.hero-actions { width: 100%; flex-direction: column; }.button { width: 100%; justify-content: space-between; }.hero-foot { padding-top: 24px; }
   .hero-overlay-section { -webkit-backdrop-filter: saturate(108%) blur(10px); backdrop-filter: saturate(108%) blur(10px); }
   .work-section { padding-top: 110px; }.section-heading { display: block; padding-bottom: 54px; }.section-heading h2 { margin-top: 34px; font-size: 52px; }.section-heading p { margin-top: 24px; }.work-section .section-heading { padding-bottom: 28px; }.work-section .section-heading h2 { margin-top: 25px; font-size: 46px; line-height: 1.04; }.work-section .section-heading p { margin-top: 18px; }.project-tabs-shell { width: 100%; margin-bottom: 32px; padding-inline: 16px; }.project-tabs { padding: 5px; }.project-tabs button { min-height: 42px; padding-inline: 18px; font-size: 14px; }
-  .projects { gap: 20px; padding: 0 16px 20px; scroll-padding-inline: 16px; }.project { flex-basis: calc(100vw - 32px); width: calc(100vw - 32px); }.project-inner { border-radius: 16px; }.project-content, .project-3 .project-content { padding: 32px 26px; }.project-index { align-items: flex-start; margin-bottom: 24px; }.project-index span:last-child { max-width: 86px; text-align: right; }.project h3 { font-size: 38px; }.project-description { font-size: 14px; }.project-tags { margin-top: 22px; }.project-tags li { padding: 7px 10px; font-size: 11px; }.project-role { margin-top: 24px; }.project-visual, .project-3 .project-visual { width: auto; min-height: 310px; margin-left: 0; padding: 26px 20px; }.browser-shell { height: auto; aspect-ratio: 1.08; }.browser-top { height: 20px; }.bid-ui, .rental-ui, .recruit-ui, .services-ui, .claims-ui { height: calc(100% - 20px); }.bid-grid section { min-height: 90px; }.candidate-layout aside > div:nth-of-type(n+4) { display: none; }.rental-copy strong { font-size: 27px; }.booking-bar { gap: 3%; }.services-ui { padding: 5%; }.phone-shell { width: 36%; right: 6%; }.service-copy { width: 58%; }.claim-table > div:nth-child(n+4) { display: none; }
+  .projects { gap: 20px; padding: 0 16px 20px; scroll-padding-inline: 16px; }.project { flex-basis: calc(100vw - 32px); width: calc(100vw - 32px); }.project-inner { border-radius: 16px; }.project-content, .project-3 .project-content { padding: 32px 26px; }.project-index { align-items: flex-start; margin-bottom: 24px; }.project-index span:last-child { max-width: 86px; text-align: right; }.project h3 { font-size: 38px; }.project-description { font-size: 14px; }.project-tags { margin-top: 22px; }.project-tags li { padding: 7px 10px; font-size: 11px; }.project-role { margin-top: 24px; }.project-visual, .project-3 .project-visual { width: auto; min-height: 310px; margin-left: 0; padding: 26px 20px; }.browser-shell { height: auto; aspect-ratio: 1.08; }.browser-top { height: 20px; }.bid-ui, .rental-ui, .recruit-ui, .services-ui, .claims-ui { height: calc(100% - 20px); }.bid-grid section { min-height: 90px; }.candidate-layout aside > div:nth-of-type(n+4) { display: none; }.rental-copy strong { font-size: 27px; }.booking-bar { gap: 3%; }.services-ui { padding: 5%; }.phone-shell { width: 36%; right: 6%; }.service-copy { width: 58%; }
   .rental-phone, .services-phone { height: 230px; border-width: 5px; border-radius: 22px; }
   .project-controls { padding-top: 12px; padding-bottom: 48px; }.project-controls button { width: 42px; height: 42px; }
   .impact { padding-top: 120px; padding-bottom: 120px; }.impact-heading { display: block; padding-bottom: 50px; }.impact-heading h2 { margin-top: 32px; font-size: 50px; }.impact-heading p { margin-top: 22px; }.stats { grid-template-columns: 1fr 1fr; }.stats b { font-size: 52px; }.stats div { padding-top: 38px; }
@@ -475,6 +473,7 @@ footer nav { display: flex; align-items: center; gap: 28px; } footer nav a { col
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .hero-scroll-stage .hero { animation: none; opacity: 1; transform: none; will-change: auto; }
   .reveal { animation: none; }
+  .claims-ui { background-position: center top !important; }
 }
 
 @media print {
