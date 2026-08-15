@@ -39,6 +39,23 @@
 .cs-story-nav a { flex: 0 0 auto; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; transition: color .2s; }
 .cs-story-nav a:hover { color: var(--ink); }
 
+.cs-answers { padding-top: 150px; padding-bottom: 150px; scroll-margin-top: 58px; }
+.cs-answers-intro { max-width: 900px; }
+.cs-answers-intro > span { color: var(--case-accent); font-size: 12px; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.cs-answers-intro h2 { margin: 25px 0 0; font-size: clamp(48px, 6.2vw, 82px); font-weight: 460; line-height: 1.02; letter-spacing: -.06em; }
+.cs-answers-intro p { max-width: 650px; margin: 28px 0 0; color: var(--muted); font-size: 18px; line-height: 1.65; }
+.cs-answer-list { margin-top: 76px; border-top: 1px solid var(--line); }
+.cs-answer { min-height: 280px; padding: 34px 0; display: grid; grid-template-columns: .82fr 1.18fr; gap: 80px; border-bottom: 1px solid var(--line); scroll-margin-top: 86px; }
+.cs-answer-question { display: grid; grid-template-columns: 52px 1fr; gap: 18px; align-content: start; }
+.cs-answer-question > span { padding-top: 7px; color: var(--case-accent); font-size: 11px; font-weight: 650; }
+.cs-answer-question h3 { max-width: 440px; margin: 0; font-size: clamp(28px, 3vw, 42px); font-weight: 490; line-height: 1.12; letter-spacing: -.04em; }
+.cs-answer-copy { position: relative; padding-right: 145px; }
+.cs-answer-copy > p { max-width: 650px; margin: 0; font-size: 18px; line-height: 1.65; }
+.cs-answer-copy ul { margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+.cs-answer-copy li { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); font-size: 11px; }
+.cs-answer-status { position: absolute; top: 3px; right: 0; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--case-accent) 10%, transparent); color: var(--case-accent); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.cs-answer-status.is-not-applicable, .cs-answer-status.is-not-measured { background: color-mix(in srgb, var(--ink) 6%, transparent); color: var(--muted); }
+
 .cs-section { padding-top: 170px; padding-bottom: 170px; scroll-margin-top: 58px; }
 .cs-section-heading { max-width: 980px; }
 .cs-section-heading h2, .cs-sticky-copy h2 { margin: 25px 0 0; font-size: clamp(48px, 6.2vw, 82px); font-weight: 460; line-height: 1.02; letter-spacing: -.06em; }
@@ -159,6 +176,8 @@
   .cs-hero { grid-template-columns: 1fr; gap: 50px; }
   .cs-meta { max-width: 720px; }
   .cs-hero-visual, .cs-hero-actions { grid-column: auto; }
+  .cs-answer { grid-template-columns: 1fr; gap: 34px; }
+  .cs-answer-copy { padding-left: 70px; }
   .cs-overview-grid { grid-template-columns: 1fr; gap: 45px; }
   .cs-problem-grid { grid-template-columns: 1fr; }
   .cs-problem-grid article, .cs-problem-grid article:not(:first-child) { min-height: 0; padding: 27px 0; display: grid; grid-template-columns: 80px .55fr 1fr; align-items: start; gap: 24px; border-right: 0; border-bottom: 1px solid color-mix(in srgb, var(--process-fg) 20%, transparent); }
@@ -197,6 +216,16 @@
   .cs-hero-visual img, .cs-visual img { border-radius: 9px; }
   .cs-hero-actions { align-items: flex-start; flex-direction: column; }
   .cs-story-nav .cs-shell { gap: 24px; }
+  .cs-answers { padding-top: 100px; padding-bottom: 100px; }
+  .cs-answers-intro h2 { margin-top: 20px; font-size: 45px; }
+  .cs-answers-intro p { margin-top: 22px; font-size: 16px; }
+  .cs-answer-list { margin-top: 50px; }
+  .cs-answer { min-height: 0; padding: 30px 0; gap: 26px; }
+  .cs-answer-question { grid-template-columns: 34px 1fr; gap: 10px; }
+  .cs-answer-question h3 { font-size: 29px; }
+  .cs-answer-copy { padding: 0; }
+  .cs-answer-copy > p { padding-top: 42px; font-size: 16px; }
+  .cs-answer-status { top: 0; left: 0; right: auto; }
   .cs-section, .cs-problem, .cs-insights, .cs-system, .cs-final { padding-top: 110px; padding-bottom: 110px; }
   .cs-section-heading h2, .cs-sticky-copy h2 { margin-top: 20px; font-size: 45px; }
   .cs-section-heading > p, .cs-sticky-copy > p { margin-top: 22px; font-size: 16px; }

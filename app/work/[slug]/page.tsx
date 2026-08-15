@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import CaseStudyTemplate from "../../components/case-study/CaseStudyTemplate";
 import { caseStudySlugs, getCaseStudy } from "../../data/case-studies";
@@ -15,9 +16,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = getCaseStudy(slug);
   if (!project) return {};
 
+  const requestHeaders = await headers();
+  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "aamir-khan.design";
+  const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
+  const heroUrl = new URL(project.hero.src, `${protocol}://${host}`).toString();
+  const title = `${project.title} — UX Case Study · Aamir Khan`;
+
   return {
-    title: `${project.title} — UX Case Study · Aamir Khan`,
+    title,
     description: project.proposition,
+    openGraph: {
+      type: "article",
+      title,
+      description: project.proposition,
+      images: [{ url: heroUrl, alt: project.hero.alt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: project.proposition,
+      images: [heroUrl],
+    },
   };
 }
 

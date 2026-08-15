@@ -12,6 +12,14 @@ export type CaseStudyVisual = {
   variant?: "standard" | "phone" | "phone-pair";
 };
 
+export type CaseStudyAnswer = {
+  id: string;
+  question: string;
+  answer: string;
+  evidence: string[];
+  status?: "verified" | "qualitative" | "not-applicable" | "not-measured";
+};
+
 export type CaseStudy = {
   slug: string;
   accent: string;
@@ -19,6 +27,7 @@ export type CaseStudy = {
   title: string;
   proposition: string;
   metadata: CaseStudyMeta[];
+  answers?: CaseStudyAnswer[];
   hero: CaseStudyVisual;
   overview: {
     heading: string;
@@ -106,9 +115,60 @@ export const caseStudies: Record<string, CaseStudy> = {
     metadata: [
       { label: "Role", value: "UX Designer" },
       { label: "Timeline", value: "Oct–Nov 2022" },
-      { label: "Team", value: "Details to be added" },
+      { label: "Team", value: "Independent UX project · peer feedback" },
       { label: "Platform", value: "Mobile · Tablet · Desktop" },
       { label: "Contribution", value: "Research · Wireframing · UI · Prototyping · Usability study" },
+    ],
+    answers: [
+      {
+        id: "problem-answer",
+        question: "What problem did I solve?",
+        answer: "People taking regular medicine could forget when a dose was due, which medicine to take, or whether they had already completed it. I designed one dependable daily view that brings the medicine, time, and completion state together.",
+        evidence: ["Medicine + time in one reminder", "Visible daily progress", "Upcoming and completed states"],
+        status: "verified",
+      },
+      {
+        id: "decision-answer",
+        question: "Why did I make that decision?",
+        answer: "Research showed that a time-only alert did not give people enough context. I made the day—not settings—the primary navigation model so the next dose and the status of the full routine could be understood without moving between screens.",
+        evidence: ["Day-first information architecture", "Schedule before settings", "Direct quick-view access"],
+        status: "verified",
+      },
+      {
+        id: "research-answer",
+        question: "How did I research it?",
+        answer: "I conducted interviews and empathy mapping, created two personas representing memory and busy-schedule needs, audited competing reminder products, and tested the prototype in an unmoderated remote usability study with five participants in India.",
+        evidence: ["User interviews", "2 personas", "Competitive audit", "5-person usability study"],
+        status: "verified",
+      },
+      {
+        id: "change-answer",
+        question: "What changed after my solution?",
+        answer: "The tested iteration made reminder access easier to find, refined the quick-view screen, and added text-size, audio, and motivation controls. The same hierarchy was then adapted for mobile, tablet, and desktop.",
+        evidence: ["Revised home header", "Refined quick view", "3 accessibility controls", "3 responsive form factors"],
+        status: "qualitative",
+      },
+      {
+        id: "collaboration-answer",
+        question: "How did I collaborate with developers and product teams?",
+        answer: "This was an independent UX concept, so there was no developer or product-team delivery collaboration to claim. Peer critique informed the iterations; the responsive information architecture and reusable reminder-card pattern were prepared as a practical foundation for a future engineering handoff.",
+        evidence: ["Independent project", "Peer feedback", "Handoff-ready responsive logic"],
+        status: "not-applicable",
+      },
+      {
+        id: "ai-answer",
+        question: "Where did AI help me?",
+        answer: "AI was not used in the original 2022 project. Interviews, synthesis, wireframing, prototyping, and usability work were completed through the documented UX process, so this case study does not attribute any design decision to AI.",
+        evidence: ["No AI use claimed", "Human-led research and synthesis"],
+        status: "not-applicable",
+      },
+      {
+        id: "impact-answer",
+        question: "What was the measurable impact?",
+        answer: "The documented evidence is five usability participants, delivery across three form factors, and positive peer feedback about the flow. Because the concept was not shipped, adoption, adherence, conversion, and support metrics were not measured—and are not presented as outcomes.",
+        evidence: ["5 usability participants", "3 form factors", "Qualitative peer feedback", "No production KPI available"],
+        status: "not-measured",
+      },
     ],
     hero: {
       src: "/images/projects/medicine-reminder-preview.jpg",
@@ -124,6 +184,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       evidence: ["Daily reminder schedule", "Dose progress and status", "Flexible alert settings", "Responsive product foundation"],
     },
     problem: {
+      heading: "What problem did I solve?",
       intro: "Remembering a dose is not only a scheduling problem. The experience also needs to make the medicine, timing and completion state immediately clear.",
       points: [
         { title: "Memory", description: "Users may forget that a dose is due during a busy or disrupted day." },
@@ -132,6 +193,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
     },
     research: {
+      heading: "How did I research it?",
       intro: "The source case study documents interviews, empathy mapping, two personas and a competitive audit before interface design began.",
       methods: [
         { label: "01", title: "User interviews", description: "Interviews were used to understand reminder habits and the needs behind missed medicines." },
@@ -193,6 +255,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         impact: "The design creates a foundation for consistent use across mobile, tablet and desktop.",
       },
     ],
+    decisionsHeading: "Why did I make these product decisions?",
     designSystem: {
       heading: "A calm visual language for an important daily task.",
       description: "The final direction uses a restrained blue foundation, green completion states, generous white space and repeatable reminder cards.",
@@ -204,6 +267,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
     },
     validation: {
+      heading: "What changed after testing?",
       intro: "The source case study records an unmoderated remote usability study. The detailed findings were not included, so this template preserves an explicit placeholder instead of inventing results.",
       study: ["5 participants", "India · remote", "30–60 minutes", "Unmoderated study"],
       cycle: [
@@ -234,15 +298,25 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
     },
     outcomes: {
+      heading: "What was the measurable impact?",
       items: [
-        { value: "Clearer", label: "Daily schedule", detail: "Medicine, time and completion state share one hierarchy." },
-        { value: "Scalable", label: "Responsive foundation", detail: "The core experience adapts across three form factors." },
-        { value: "To add", label: "Measured product impact", detail: "Add verified adoption, completion or support metrics when available.", placeholder: true },
+        { value: "5", label: "Usability participants", detail: "An unmoderated remote study was completed with five participants in India." },
+        { value: "3", label: "Responsive form factors", detail: "The core schedule hierarchy was designed for mobile, tablet, and desktop." },
+        { value: "Not measured", label: "Production KPIs", detail: "This was an unshipped concept, so adoption, adherence, and support metrics are not claimed.", placeholder: true },
       ],
       quote: "“The application flow is so easy and intuitive and the concept is nice.” — Peer feedback recorded in the original case study",
     },
     learning: "The first interface is only the beginning. Research, usability work and peer feedback are what turn an initial idea into a clearer product experience.",
     sourcePdf: "/case-studies/medicine-reminder-case-study.pdf",
+    navigation: [
+      { label: "Problem", href: "#problem-answer" },
+      { label: "Decision", href: "#decision-answer" },
+      { label: "Research", href: "#research-answer" },
+      { label: "Change", href: "#change-answer" },
+      { label: "Collaboration", href: "#collaboration-answer" },
+      { label: "AI", href: "#ai-answer" },
+      { label: "Impact", href: "#impact-answer" },
+    ],
   },
   "car-rental": {
     slug: "car-rental",

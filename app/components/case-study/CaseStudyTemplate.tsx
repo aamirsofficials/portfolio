@@ -60,6 +60,33 @@ export default function CaseStudyTemplate({ project }: { project: CaseStudy }) {
           </div>
         </nav>
 
+        {project.answers && (
+          <section className="cs-answers cs-shell" id="answers" aria-labelledby="answers-heading">
+            <div className="cs-answers-intro reveal">
+              <span>Case study summary</span>
+              <h2 id="answers-heading">The case, in seven clear answers.</h2>
+              <p>Start here for the problem, evidence, decisions, collaboration, AI use, and impact. The detailed process follows below.</p>
+            </div>
+            <div className="cs-answer-list">
+              {project.answers.map((item, index) => (
+                <article className="cs-answer reveal" id={item.id} key={item.id}>
+                  <div className="cs-answer-question">
+                    <span>0{index + 1}</span>
+                    <h3>{item.question}</h3>
+                  </div>
+                  <div className="cs-answer-copy">
+                    <p>{item.answer}</p>
+                    <ul>
+                      {item.evidence.map(evidence => <li key={evidence}>{evidence}</li>)}
+                    </ul>
+                    {item.status && <span className={`cs-answer-status is-${item.status}`}>{item.status.replace("-", " ")}</span>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="cs-section cs-shell cs-overview" id="overview">
           <div className="cs-section-heading reveal"><span>01 · Overview</span><h2>{project.overview.heading}</h2></div>
           <div className="cs-overview-grid reveal">
