@@ -54,8 +54,6 @@ const projects = [
     problem: "Rental choices, pricing and add-ons can make a simple booking feel unnecessarily complex.",
     outcome: "A clearer comparison and checkout flow designed to reduce uncertainty at every decision point.",
     visual: "rental",
-    caseStudy: "/work/car-rental",
-    actionLabel: "Read case study",
   },
   {
     id: "recrugo",

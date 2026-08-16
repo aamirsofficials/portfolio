@@ -510,8 +510,9 @@ export const caseStudies: Record<string, CaseStudy> = {
   },
 };
 
-export const caseStudySlugs = Object.keys(caseStudies);
+export const caseStudySlugs = Object.keys(caseStudies).filter(slug => slug !== "car-rental");
 
 export function getCaseStudy(slug: string) {
+  if (slug === "car-rental") return undefined;
   return caseStudies[slug];
 }
