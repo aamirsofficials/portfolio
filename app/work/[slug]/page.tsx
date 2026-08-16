@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import CarRentalCaseStudy from "../../components/case-study/CarRentalCaseStudy";
 import CaseStudyTemplate from "../../components/case-study/CaseStudyTemplate";
 import { caseStudySlugs, getCaseStudy } from "../../data/case-studies";
 import "./case-study.css";
+import "./car-rental-case-study.css";
 
 export const dynamicParams = false;
 
@@ -44,5 +46,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const { slug } = await params;
   const project = getCaseStudy(slug);
   if (!project) notFound();
+  if (slug === "car-rental") return <CarRentalCaseStudy />;
   return <CaseStudyTemplate project={project} />;
 }
