@@ -322,8 +322,8 @@ export const caseStudies: Record<string, CaseStudy> = {
     slug: "car-rental",
     accent: "#f0b900",
     category: "Product Design · UX/UI",
-    title: "Car Rental Booking Platform",
-    proposition: "Making vehicle discovery, comparison and booking simpler and more transparent.",
+    title: "Car Rental",
+    proposition: "Making car rental simpler, from discovery to booking.",
     metadata: [
       { label: "Role", value: "Product Designer — UX/UI" },
       { label: "Scope", value: "UX Strategy · User Flows · Interaction Design · UI Design · Prototyping" },
