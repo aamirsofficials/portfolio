@@ -336,7 +336,7 @@ export default function Home() {
 
       <section className="work-section" id="work" aria-labelledby="work-title">
         <div className="section-heading section-shell reveal">
-          <span className="eyebrow">Selected work · 2020—2026</span>
+          <span className="eyebrow">Selected work</span>
           <h2 id="work-title">Products made clear<span className="accent-dot">.</span></h2>
           <p>A selection of products I&apos;ve designed across AI, SaaS, marketplaces, mobility and service platforms.</p>
         </div>
