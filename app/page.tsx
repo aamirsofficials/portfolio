@@ -154,7 +154,7 @@ const capabilities = [
   ["Collaboration", "Technical collaboration", "Design–engineering handoff", "Frontend understanding", "Stakeholder alignment"],
 ];
 
-const technicalSkillGroups = [
+const technicalSkillGroups: Array<[string, string[]]> = [
   ["UI Design Tools", ["Figma", "Photoshop", "Illustrator", "Miro", "Framer", "Sketch"]],
   ["AI & Emerging Technologies", ["ChatGPT", "Claude", "Claude Design", "Google Stitch", "Gemini", "Cursor AI", "GitHub Copilot", "Prompt Engineering", "AI Feature Ideation", "Human-AI Interaction", "Conversational UX"]],
   ["Media Design Tools", ["Adobe InDesign", "CorelDRAW", "Adobe Premiere Pro", "Canva"]],
@@ -400,7 +400,7 @@ export default function Home() {
       </section>
 
       <section className="tech-section reveal" aria-labelledby="tech-title">
-        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><div className="tech-skill-groups">{technicalSkillGroups.map(([title, items]) => <section key={title}><h3>{title as string}</h3><p>{(items as string[]).join(", ")}</p></section>)}</div></div></div>
+        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><div className="tech-skill-groups">{technicalSkillGroups.map(([title, items]) => <section key={title}><h3>{title}</h3><p>{items.join(", ")}</p></section>)}</div></div></div>
       </section>
 
       <section className="experience section-shell reveal" id="experience" aria-labelledby="experience-title">
