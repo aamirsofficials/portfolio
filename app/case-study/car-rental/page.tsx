@@ -118,6 +118,37 @@ const quantitativeInsights = [
   { value: 24, label: "Abandoned during payment" },
 ] as const;
 
+const impactSignals = [
+  {
+    value: "42%",
+    title: "Detail-to-checkout drop-off",
+    observed: "Users left between the vehicle details screen and checkout.",
+    outcome: "Clearer costs and rental conditions should help more users continue to checkout.",
+    measure: "Vehicle detail → checkout completion rate",
+  },
+  {
+    value: "31%",
+    title: "Pricing and condition rechecks",
+    observed: "Users revisited pricing or rental conditions before completing a booking.",
+    outcome: "Earlier cost and policy visibility should reduce repeated information checks.",
+    measure: "Repeat visits to pricing and policy content",
+  },
+  {
+    value: "24%",
+    title: "Payment-stage abandonment",
+    observed: "Nearly one in four booking attempts ended during payment.",
+    outcome: "Clear payment expectations and reassurance should reduce last-stage exits.",
+    measure: "Payment completion and abandonment rate",
+  },
+  {
+    value: "68%",
+    title: "Vehicle filter usage",
+    observed: "Most users interacted with filters before choosing a vehicle.",
+    outcome: "Focused filters and clearer comparison should support faster vehicle selection.",
+    measure: "Search → selection rate and time to selection",
+  },
+] as const;
+
 type FlowNodeKind = "start" | "end" | "screen" | "action" | "system" | "decision";
 
 function FlowNode({
@@ -613,6 +644,41 @@ export default function CarRentalCaseStudyPage() {
       <section className="car-hifi-designs" aria-labelledby="car-hifi-designs-title">
         <div className="car-case-study-shell">
           <HiFiCarousel />
+        </div>
+      </section>
+
+      <section className="car-impact-outcomes" aria-labelledby="car-impact-title">
+        <div className="car-case-study-shell">
+          <header className="car-impact-intro reveal">
+            <p className="car-impact-eyebrow">07 · Impact &amp; Outcomes</p>
+            <h2 id="car-impact-title">Impact &amp; Outcomes<span>.</span></h2>
+            <p>The redesign targets four measurable friction points found in the quantitative research. The figures below are research baselines, not claimed post-launch results.</p>
+          </header>
+
+          <div className="car-impact-data-grid reveal">
+            {impactSignals.map((signal) => (
+              <article className="car-impact-data-card" key={signal.title}>
+                <div className="car-impact-data-value">
+                  <strong>{signal.value}</strong>
+                  <span>Research baseline</span>
+                </div>
+                <h3>{signal.title}</h3>
+                <p className="car-impact-data-observed">{signal.observed}</p>
+                <dl>
+                  <div>
+                    <dt>Expected outcome</dt>
+                    <dd>{signal.outcome}</dd>
+                  </div>
+                  <div>
+                    <dt>Validate with</dt>
+                    <dd>{signal.measure}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+          </div>
+
+          <p className="car-impact-data-note reveal">Post-launch analytics and usability testing would be required to confirm whether these outcomes were achieved.</p>
         </div>
       </section>
 

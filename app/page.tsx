@@ -5,7 +5,26 @@ import Image from "next/image";
 import { useTheme } from "./components/ThemeProvider";
 import PortfolioFooter from "./components/PortfolioFooter";
 
-const projects = [
+type Project = {
+  id: string;
+  number: string;
+  name: string;
+  title: string;
+  platform: string;
+  role: string;
+  tags: string[];
+  categories: string[];
+  description: string;
+  problem: string;
+  outcome: string;
+  visual: string;
+  caseStudy?: string;
+  caseStudyImages?: string[];
+  actionLabel?: string;
+  actionExternal?: boolean;
+};
+
+const projects: Project[] = [
   {
     id: "medicine-reminder",
     number: "01",
@@ -119,22 +138,58 @@ const projects = [
     caseStudy: "/case-studies/core-techies-brandbook.pdf",
     actionExternal: true,
   },
+  {
+    id: "recrugo-brand",
+    number: "08",
+    name: "Recrugo",
+    title: "Brand Identity & Guidelines",
+    platform: "Branding",
+    role: "Brand identity · Logo system · Brand guidelines",
+    tags: ["Brand Identity", "Logo Design", "Visual System", "Guidelines"],
+    categories: ["Branding"],
+    description:
+      "A modern, confident identity system for an AI-powered recruitment platform.",
+    problem:
+      "Recrugo needed a distinctive brand that could communicate intelligent matching and stay consistent across product and marketing touchpoints.",
+    outcome:
+      "A complete brand system covering logo construction, applications, colour, typography, variants and usage standards.",
+    visual: "recruit",
+    caseStudyImages: [
+      "/images/branding/recrugo/frame-01.jpg",
+      "/images/branding/recrugo/frame-02.jpg",
+      "/images/branding/recrugo/frame-03.jpg",
+      "/images/branding/recrugo/frame-04.jpg",
+      "/images/branding/recrugo/frame-05.jpg",
+      "/images/branding/recrugo/frame-06.jpg",
+      "/images/branding/recrugo/frame-07.jpg",
+      "/images/branding/recrugo/frame-08.jpg",
+      "/images/branding/recrugo/frame-09.jpg",
+      "/images/branding/recrugo/frame-10.jpg",
+      "/images/branding/recrugo/frame-11.jpg",
+    ],
+  },
 ];
 
 const projectTabs = ["UX/UI", "Branding", "Logos", "Marketing"] as const;
 
-const logos = [
+type LogoItem = {
+  name: string;
+  src: string;
+  detailImage?: string;
+};
+
+const logos: readonly LogoItem[] = [
   { name: "Core Techies", src: "/images/logos/core-techies.png" },
-  { name: "Laundry Cube", src: "/images/logos/laundry-cube.png" },
-  { name: "Lorrying", src: "/images/logos/lorrying.png" },
-  { name: "Recrugo", src: "/images/logos/recrugo.png" },
+  { name: "Laundry Cube", src: "/images/logos/laundry-cube.png", detailImage: "/images/logos/laundry-cube-brand-explanation.jpg" },
+  { name: "Lorrying", src: "/images/logos/lorrying.png", detailImage: "/images/logos/lorrying-brand-explanation.jpg" },
+  { name: "Recrugo", src: "/images/logos/recrugo.png", detailImage: "/images/logos/recrugo-brand-explanation.jpg" },
   { name: "Stepout Live", src: "/images/logos/stepout-live.png" },
-  { name: "CyberAlerts", src: "/images/logos/cyberalerts.png" },
-  { name: "FreshDeal24", src: "/images/logos/freshdeal24.png" },
-  { name: "GBL", src: "/images/logos/gbl.png" },
+  { name: "CyberAlerts", src: "/images/logos/cyberalerts.png", detailImage: "/images/logos/cyberalerts-brand-explanation.jpg" },
+  { name: "FreshDeal24", src: "/images/logos/freshdeal24.png", detailImage: "/images/logos/freshdeal24-brand-explanation.jpg" },
+  { name: "GBL", src: "/images/logos/gbl.png", detailImage: "/images/logos/gbl-brand-explanation.jpg" },
   { name: "Invictus Capital", src: "/images/logos/invictus-capital.png" },
-  { name: "KFU", src: "/images/logos/kfu.png" },
-  { name: "Muaven", src: "/images/logos/muaven.png" },
+  { name: "KFU", src: "/images/logos/kfu.png", detailImage: "/images/logos/kabaddi-federation-uganda-brand-explanation.jpg" },
+  { name: "Muaven", src: "/images/logos/muaven.png", detailImage: "/images/logos/muaven-brand-explanation.jpg" },
   { name: "Pet Mates", src: "/images/logos/pet-mates.png" },
   { name: "Raval Shah", src: "/images/logos/raval-shah.png" },
 ] as const;
@@ -245,9 +300,13 @@ export default function Home() {
   const projectsRef = useRef<HTMLDivElement>(null);
   const projectTabsRef = useRef<HTMLDivElement>(null);
   const tabSwitchTimerRef = useRef<number | null>(null);
+  const logoModalCloseRef = useRef<HTMLButtonElement>(null);
+  const brandModalCloseRef = useRef<HTMLButtonElement>(null);
   const [activeProjectTab, setActiveProjectTab] = useState<(typeof projectTabs)[number]>("UX/UI");
   const [displayedProjectTab, setDisplayedProjectTab] = useState<(typeof projectTabs)[number]>("UX/UI");
   const [projectsChanging, setProjectsChanging] = useState(false);
+  const [selectedLogo, setSelectedLogo] = useState<LogoItem | null>(null);
+  const [selectedBrandCaseStudy, setSelectedBrandCaseStudy] = useState<Project | null>(null);
   const visibleProjects = projects.filter(project => project.categories.includes(displayedProjectTab));
   const visibleItemCount = displayedProjectTab === "Logos" ? logos.length : visibleProjects.length;
 
@@ -258,6 +317,42 @@ export default function Home() {
   useEffect(() => () => {
     if (tabSwitchTimerRef.current !== null) window.clearTimeout(tabSwitchTimerRef.current);
   }, []);
+
+  useEffect(() => {
+    if (!selectedLogo) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    logoModalCloseRef.current?.focus();
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setSelectedLogo(null);
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedLogo]);
+
+  useEffect(() => {
+    if (!selectedBrandCaseStudy) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    brandModalCloseRef.current?.focus();
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setSelectedBrandCaseStudy(null);
+    }
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [selectedBrandCaseStudy]);
 
   useLayoutEffect(() => {
     const tablist = projectTabsRef.current;
@@ -355,7 +450,13 @@ export default function Home() {
           </div>
         </div>
         <div className={`projects ${displayedProjectTab === "Logos" ? "logo-projects" : ""} ${projectsChanging ? "is-changing" : ""}`} key={displayedProjectTab} id="project-panel" role="tabpanel" aria-labelledby={`project-tab-${activeProjectTab.toLowerCase().replace(/[^a-z]+/g, "-")}`} ref={projectsRef} tabIndex={0}>
-          {displayedProjectTab === "Logos" ? logos.map((logo, index) => (
+          {displayedProjectTab === "Logos" ? logos.map((logo, index) => logo.detailImage ? (
+            <button className="logo-card logo-card-button reveal" type="button" key={logo.name} aria-label={`View ${logo.name} logo details`} style={{ animationDelay: `${Math.min(index, 5) * 45}ms` }} onClick={() => setSelectedLogo(logo)}>
+              <div className="logo-image-frame">
+                <img src={logo.src} alt={`${logo.name} logo`} className="logo-image" draggable={false} />
+              </div>
+            </button>
+          ) : (
             <article className="logo-card reveal" key={logo.name} aria-label={`${logo.name} logo`} style={{ animationDelay: `${Math.min(index, 5) * 45}ms` }}>
               <div className="logo-image-frame">
                 <img src={logo.src} alt={`${logo.name} logo`} className="logo-image" draggable={false} />
@@ -370,8 +471,17 @@ export default function Home() {
                   <p className="project-description">{project.description}</p>
                   <ul className="project-tags" aria-label={`${project.name} disciplines`}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
                   <p className="project-role"><span>My role</span>{project.role}</p>
-                  {project.caseStudy ? (
-                    <a className="case-study-link" href={project.caseStudy} target={project.actionExternal ? "_blank" : undefined} rel={project.actionExternal ? "noreferrer" : undefined} aria-label={`${project.actionLabel ?? "View case study"}: ${project.name}${project.actionExternal ? " (opens in a new tab)" : ""}`}>{project.actionLabel ?? "View case study"} <Arrow /></a>
+                        {project.caseStudyImages?.length ? (
+                          <button
+                            className="case-study-link case-study-button"
+                            type="button"
+                            onClick={() => setSelectedBrandCaseStudy(project)}
+                            aria-label={`View case study: ${project.name}`}
+                          >
+                            View case study <Arrow />
+                          </button>
+                        ) : project.caseStudy ? (
+                          <a className="case-study-link" href={project.caseStudy} target={project.actionExternal ? "_blank" : undefined} rel={project.actionExternal ? "noreferrer" : undefined} aria-label={`${project.actionLabel ?? "View case study"}: ${project.name}${project.actionExternal ? " (opens in a new tab)" : ""}`}>{project.actionLabel ?? "View case study"} <Arrow /></a>
                   ) : (
                     <details className="case-details">
                       <summary>View case study <Arrow /></summary>
@@ -389,6 +499,67 @@ export default function Home() {
           <button type="button" onClick={() => scrollProjects(1)} aria-label="Next project" disabled={visibleItemCount < 2}>→</button>
         </div>
       </section>
+
+      {selectedLogo?.detailImage && (
+        <div className="logo-modal" role="dialog" aria-modal="true" aria-labelledby="logo-modal-title" onMouseDown={event => {
+          if (event.target === event.currentTarget) setSelectedLogo(null);
+        }}>
+          <div className="logo-modal-panel">
+            <div className="logo-modal-header">
+              <div>
+                <span>Logo design</span>
+                <h2 id="logo-modal-title">{selectedLogo.name}</h2>
+              </div>
+              <button ref={logoModalCloseRef} className="logo-modal-close" type="button" onClick={() => setSelectedLogo(null)} aria-label="Close logo details">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="logo-modal-image-wrap">
+              <img src={selectedLogo.detailImage} alt={`${selectedLogo.name} logo concept, meaning, colour psychology and brand variations`} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedBrandCaseStudy?.caseStudyImages?.length ? (
+        <div
+          className="logo-modal brand-case-study-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="brand-case-study-title"
+          onMouseDown={event => {
+            if (event.target === event.currentTarget) setSelectedBrandCaseStudy(null);
+          }}
+        >
+          <div className="logo-modal-panel brand-case-study-panel">
+            <div className="logo-modal-header">
+              <div>
+                <span>Branding case study</span>
+                <h2 id="brand-case-study-title">{selectedBrandCaseStudy.name}</h2>
+              </div>
+              <button
+                ref={brandModalCloseRef}
+                className="logo-modal-close"
+                type="button"
+                onClick={() => setSelectedBrandCaseStudy(null)}
+                aria-label="Close Recrugo case study"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="brand-case-study-images">
+              {selectedBrandCaseStudy.caseStudyImages.map((src, index) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={`Recrugo brand book page ${index + 1}`}
+                  loading={index < 2 ? "eager" : "lazy"}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       <section className="process-section reveal" aria-labelledby="process-title">
         <div className="section-shell"><div className="section-heading compact"><span className="eyebrow">Method, not ceremony</span><h2 id="process-title">How I work<span className="accent-dot">.</span></h2></div><div className="process-grid">{process.map(([number, title, copy], index) => <article key={title}><div><span>{number}</span>{index < process.length - 1 && <i aria-hidden="true">→</i>}</div><h3>{title}</h3><p>{copy}</p></article>)}</div></div>

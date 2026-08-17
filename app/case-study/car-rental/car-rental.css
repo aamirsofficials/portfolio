@@ -833,7 +833,7 @@
 .car-empathy-feels { --empathy-color: #d99827; }
 
 .car-empathy-quadrant h4 {
-  margin: 0;
+  margin: 70px 0 0;
   color: var(--empathy-color);
   font-size: 20px;
   font-weight: 700;
@@ -843,7 +843,7 @@
 
 .car-empathy-quadrant ul {
   max-width: 420px;
-  margin: 46px 0 0;
+  margin: 18px 0 0;
   padding: 0;
   list-style: none;
 }
@@ -1441,6 +1441,379 @@
 
 .car-lofi-slide:hover .car-lofi-image img { transform: scale(1.018); }
 
+.car-impact-outcomes {
+  padding: clamp(110px, 12vw, 170px) 0;
+  background: var(--work-bg);
+  color: var(--ink);
+}
+
+.car-impact-intro { max-width: 1040px; }
+
+.car-impact-eyebrow {
+  margin: 0;
+  color: var(--case-sand);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.car-impact-intro h2 {
+  max-width: 960px;
+  margin: 30px 0 0;
+  font-size: clamp(52px, 6.4vw, 86px);
+  font-weight: 520;
+  line-height: .98;
+  letter-spacing: -.062em;
+}
+
+.car-impact-intro h2 span { color: var(--accent); }
+
+.car-impact-intro > p:last-child {
+  max-width: 800px;
+  margin: 42px 0 0;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.65;
+  letter-spacing: -.018em;
+}
+
+.car-impact-story {
+  margin: clamp(76px, 9vw, 112px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  list-style: none;
+}
+
+.car-impact-story li {
+  min-height: 126px;
+  padding: 25px 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 26px;
+}
+
+.car-impact-story li + li { border-left: 1px solid var(--line); }
+
+.car-impact-story li:not(:last-child)::after {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: -12px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--work-bg);
+  color: var(--accent);
+  font-size: 12px;
+  content: "→";
+  transform: translateY(-50%);
+}
+
+.car-impact-story span,
+.car-impact-part-heading > span,
+.car-impact-card > span,
+.car-impact-metric > span,
+.car-impact-evidence span,
+.car-impact-outcome-label {
+  color: var(--case-sand);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.car-impact-story strong {
+  max-width: 150px;
+  font-size: 14px;
+  font-weight: 620;
+  line-height: 1.3;
+}
+
+.car-impact-part { margin-top: clamp(112px, 13vw, 172px); }
+
+.car-impact-part-heading {
+  display: grid;
+  grid-template-columns: minmax(150px, .34fr) minmax(0, 1fr);
+  gap: clamp(34px, 6vw, 90px);
+  align-items: start;
+}
+
+.car-impact-part-heading > span { padding-top: 13px; }
+
+.car-impact-part-heading h3 {
+  margin: 0;
+  font-size: clamp(42px, 5vw, 66px);
+  font-weight: 530;
+  line-height: 1.02;
+  letter-spacing: -.055em;
+}
+
+.car-impact-part-heading p {
+  max-width: 760px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
+  letter-spacing: -.016em;
+}
+
+.car-impact-card-grid {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.car-impact-card,
+.car-impact-metric {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: 0 10px 28px rgba(29, 29, 31, .035);
+  transition: transform .24s ease-out, border-color .24s ease-out, box-shadow .24s ease-out;
+}
+
+.car-impact-card {
+  min-height: 245px;
+  padding: 34px 36px 36px;
+}
+
+.car-impact-card h4,
+.car-impact-metric h4 {
+  margin: 30px 0 0;
+  font-weight: 620;
+  line-height: 1.18;
+  letter-spacing: -.032em;
+}
+
+.car-impact-card h4 { font-size: 27px; }
+
+.car-impact-card p,
+.car-impact-metric p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.64;
+  letter-spacing: -.014em;
+}
+
+.car-impact-card:hover,
+.car-impact-metric:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
+  box-shadow: 0 20px 42px rgba(29, 29, 31, .09);
+}
+
+.car-impact-evidence {
+  margin-top: clamp(112px, 13vw, 172px);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.car-impact-evidence > div {
+  min-height: 190px;
+  padding: 30px 26px;
+  position: relative;
+}
+
+.car-impact-evidence > div + div { border-left: 1px solid var(--line); }
+
+.car-impact-evidence > div:not(:last-child)::after {
+  position: absolute;
+  z-index: 1;
+  top: 30px;
+  right: -7px;
+  padding: 2px 0;
+  background: var(--paper);
+  color: var(--accent);
+  font-size: 14px;
+  content: "→";
+}
+
+.car-impact-evidence p {
+  margin: 34px 0 0;
+  font-size: 16px;
+  font-weight: 520;
+  line-height: 1.52;
+  letter-spacing: -.018em;
+}
+
+.car-impact-metric-grid {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.car-impact-metric {
+  min-height: 244px;
+  padding: 32px 30px;
+}
+
+.car-impact-metric h4 { font-size: 23px; }
+
+.car-impact-disclaimer {
+  max-width: 850px;
+  margin: 34px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.car-impact-outcome {
+  margin-top: clamp(112px, 13vw, 172px);
+  padding: clamp(48px, 7vw, 84px);
+  border-radius: 26px;
+  background: var(--process-bg);
+  color: var(--process-fg);
+}
+
+.car-impact-outcome h3 {
+  max-width: 940px;
+  margin: 28px 0 0;
+  font-size: clamp(48px, 6.1vw, 80px);
+  font-weight: 520;
+  line-height: 1.02;
+  letter-spacing: -.06em;
+}
+
+.car-impact-outcome-summary {
+  max-width: 780px;
+  margin: 38px 0 0;
+  color: rgba(255, 255, 255, .66);
+  font-size: 19px;
+  line-height: 1.65;
+  letter-spacing: -.018em;
+}
+
+.car-impact-conclusion {
+  margin-top: clamp(58px, 7vw, 82px);
+  padding-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 56px;
+  border-top: 1px solid rgba(255, 255, 255, .2);
+}
+
+.car-impact-conclusion p {
+  margin: 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+.car-impact-data-grid {
+  margin-top: clamp(62px, 8vw, 96px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.car-impact-data-card {
+  min-height: 440px;
+  padding: 36px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: 0 10px 28px rgba(29, 29, 31, .035);
+  transition: transform .24s ease-out, border-color .24s ease-out, box-shadow .24s ease-out;
+}
+
+.car-impact-data-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
+  box-shadow: 0 20px 42px rgba(29, 29, 31, .09);
+}
+
+.car-impact-data-value {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.car-impact-data-value strong {
+  color: var(--case-sand);
+  font-size: clamp(50px, 5vw, 68px);
+  font-weight: 540;
+  line-height: .9;
+  letter-spacing: -.06em;
+}
+
+.car-impact-data-value span,
+.car-impact-data-card dt {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.car-impact-data-value span { padding-bottom: 5px; text-align: right; }
+
+.car-impact-data-card h3 {
+  margin: 40px 0 0;
+  font-size: 27px;
+  font-weight: 620;
+  line-height: 1.18;
+  letter-spacing: -.034em;
+}
+
+.car-impact-data-observed {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.62;
+}
+
+.car-impact-data-card dl {
+  margin: 34px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.car-impact-data-card dl > div {
+  padding: 18px 0;
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.car-impact-data-card dl > div + div { border-top: 1px solid var(--line); }
+
+.car-impact-data-card dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.car-impact-data-note {
+  max-width: 820px;
+  margin: 30px 0 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
 @media (max-width: 960px) {
   .car-case-study-shell { width: min(100% - 48px, 760px); }
   .car-case-study-overview-grid { grid-template-columns: 1fr; gap: 70px; }
@@ -1458,6 +1831,21 @@
     scroll-padding-inline: max(20px, calc((100vw - 720px) / 2));
   }
   .car-lofi-slide { flex-basis: min(372px, 62vw); width: min(372px, 62vw); }
+  .car-impact-story { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .car-impact-story li + li { border-left: 0; }
+  .car-impact-story li:nth-child(even) { border-left: 1px solid var(--line); }
+  .car-impact-story li:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .car-impact-story li:last-child { grid-column: 1 / -1; }
+  .car-impact-story li::after { display: none !important; }
+  .car-impact-part-heading { grid-template-columns: 130px minmax(0, 1fr); gap: 38px; }
+  .car-impact-evidence { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .car-impact-evidence > div + div { border-left: 0; }
+  .car-impact-evidence > div:nth-child(even) { border-left: 1px solid var(--line); }
+  .car-impact-evidence > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .car-impact-evidence > div::after { display: none; }
+  .car-impact-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .car-impact-data-card { min-height: 460px; padding: 32px; }
+  .car-impact-data-card dl > div { grid-template-columns: 112px minmax(0, 1fr); }
 }
 
 @media (max-width: 560px) {
@@ -1530,6 +1918,7 @@
   .car-empathy { margin-top: 100px; }
   .car-empathy-map { display: flex; flex-direction: column; }
   .car-empathy-quadrant { min-height: 0; padding: 26px 22px; }
+  .car-empathy-quadrant h4 { margin-top: 0; }
   .car-empathy-quadrant ul { margin-top: 28px; }
   .car-empathy-thinks h4,
   .car-empathy-thinks ul,
@@ -1569,4 +1958,47 @@
   .car-lofi-list { gap: 14px; }
   .car-lofi-slide { flex-basis: calc(100vw - 54px); width: calc(100vw - 54px); }
   .car-lofi-card { height: 700px; padding: 25px 20px 16px; border-radius: 17px; }
+  .car-impact-outcomes { padding: 92px 0; }
+  .car-impact-intro h2 { margin-top: 26px; font-size: 46px; }
+  .car-impact-intro > p:last-child { margin-top: 30px; font-size: 17px; }
+  .car-impact-story { margin-top: 66px; grid-template-columns: 1fr; }
+  .car-impact-story li,
+  .car-impact-story li:last-child { grid-column: auto; min-height: 104px; padding: 22px 20px; }
+  .car-impact-story li + li,
+  .car-impact-story li:nth-child(even),
+  .car-impact-story li:nth-child(n + 3) { border-top: 1px solid var(--line); border-left: 0; }
+  .car-impact-part { margin-top: 92px; }
+  .car-impact-part-heading { display: block; }
+  .car-impact-part-heading > span { display: block; padding-top: 0; }
+  .car-impact-part-heading h3 { margin-top: 24px; font-size: 43px; }
+  .car-impact-part-heading p { margin-top: 22px; font-size: 16px; }
+  .car-impact-card-grid,
+  .car-impact-metric-grid { margin-top: 42px; grid-template-columns: 1fr; }
+  .car-impact-card { min-height: 0; padding: 28px 24px 32px; }
+  .car-impact-card h4 { margin-top: 25px; font-size: 25px; }
+  .car-impact-card p,
+  .car-impact-metric p { font-size: 16px; }
+  .car-impact-evidence { margin-top: 92px; grid-template-columns: 1fr; }
+  .car-impact-evidence > div { min-height: 0; padding: 26px 24px 30px; }
+  .car-impact-evidence > div + div,
+  .car-impact-evidence > div:nth-child(even),
+  .car-impact-evidence > div:nth-child(n + 3) { border-top: 1px solid var(--line); border-left: 0; }
+  .car-impact-evidence p { margin-top: 24px; }
+  .car-impact-metric { min-height: 0; padding: 28px 24px 32px; }
+  .car-impact-metric h4 { margin-top: 25px; font-size: 22px; }
+  .car-impact-disclaimer { margin-top: 30px; font-size: 12px; }
+  .car-impact-outcome { margin-top: 92px; padding: 42px 26px; border-radius: 20px; }
+  .car-impact-outcome h3 { margin-top: 24px; font-size: 43px; }
+  .car-impact-outcome-summary { margin-top: 28px; font-size: 17px; }
+  .car-impact-conclusion { margin-top: 52px; padding-top: 30px; grid-template-columns: 1fr; gap: 22px; }
+  .car-impact-conclusion p { font-size: 15px; }
+  .car-impact-data-grid { margin-top: 48px; grid-template-columns: 1fr; }
+  .car-impact-data-card { min-height: 0; padding: 28px 24px; border-radius: 17px; }
+  .car-impact-data-value { align-items: center; }
+  .car-impact-data-value strong { font-size: 54px; }
+  .car-impact-data-card h3 { margin-top: 32px; font-size: 25px; }
+  .car-impact-data-observed { font-size: 16px; }
+  .car-impact-data-card dl { margin-top: 28px; }
+  .car-impact-data-card dl > div { grid-template-columns: 1fr; gap: 8px; }
+  .car-impact-data-note { margin-top: 28px; font-size: 12px; }
 }
