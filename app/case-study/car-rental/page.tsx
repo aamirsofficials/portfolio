@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { HiFiCarousel } from "./HiFiCarousel";
 import { LoFiCarousel } from "./LoFiCarousel";
 import { PersonaCarousel } from "./PersonaCarousel";
 import "./car-rental.css";
@@ -605,6 +606,12 @@ export default function CarRentalCaseStudyPage() {
       <section className="car-lofi-designs" aria-labelledby="car-lofi-designs-title">
         <div className="car-case-study-shell">
           <LoFiCarousel />
+        </div>
+      </section>
+
+      <section className="car-hifi-designs" aria-labelledby="car-hifi-designs-title">
+        <div className="car-case-study-shell">
+          <HiFiCarousel />
         </div>
       </section>
     </main>

@@ -27,6 +27,14 @@ const bookingScreens: WireframeScreen[] = [
   { src: "/case-studies/car-rental-lofi-email-quote.png", alt: "Low-fidelity wireframe of the email quote form", width: 852, height: 1846 },
 ];
 
+const manageBookingScreens: WireframeScreen[] = [
+  { src: "/case-studies/car-rental-lofi-manage-bookings.png", alt: "Low-fidelity wireframe of the bookings list screen", width: 853, height: 1844 },
+  { src: "/case-studies/car-rental-lofi-manage-upcoming.png", alt: "Low-fidelity wireframe of an upcoming booking details screen", width: 853, height: 1844 },
+  { src: "/case-studies/car-rental-lofi-manage-self-service.png", alt: "Low-fidelity wireframe of the booking self-service menu", width: 853, height: 1843 },
+  { src: "/case-studies/car-rental-lofi-manage-extension.png", alt: "Low-fidelity wireframe of the booking extension request screen", width: 853, height: 1844 },
+  { src: "/case-studies/car-rental-lofi-manage-completed.png", alt: "Low-fidelity wireframe of a completed booking details screen", width: 853, height: 1844 },
+];
+
 type WireframeStripProps = {
   title: string;
   carouselId: string;
@@ -158,6 +166,7 @@ export function LoFiCarousel() {
 
       <WireframeStrip title="Search & Discovery" carouselId="car-lofi-discovery-carousel" screens={discoveryScreens} />
       <WireframeStrip title="Booking" carouselId="car-lofi-booking-carousel" screens={bookingScreens} />
+      <WireframeStrip title="Manage Booking" carouselId="car-lofi-manage-booking-carousel" screens={manageBookingScreens} />
     </>
   );
 }

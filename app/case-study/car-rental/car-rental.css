@@ -1252,6 +1252,76 @@
 
 .car-lofi-designs .car-ux-heading h2 span { color: var(--accent); }
 
+.car-hifi-designs {
+  padding: clamp(110px, 12vw, 170px) 0;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.car-hifi-designs .car-ux-heading h2 span { color: var(--accent); }
+
+.car-hifi-footer {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.car-hifi-figma-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(29, 29, 31, .1);
+  transition: transform .22s ease-out, box-shadow .22s ease-out;
+}
+
+.car-hifi-figma-mark {
+  width: 14px;
+  height: 21px;
+  display: grid;
+  grid-template-columns: repeat(2, 7px);
+  grid-template-rows: repeat(3, 7px);
+}
+
+.car-hifi-figma-mark i { display: block; }
+.car-hifi-figma-mark i:nth-child(1) { grid-area: 1 / 1; border-radius: 7px 0 0 7px; background: #f24e1e; }
+.car-hifi-figma-mark i:nth-child(2) { grid-area: 1 / 2; border-radius: 0 7px 7px 0; background: #ff7262; }
+.car-hifi-figma-mark i:nth-child(3) { grid-area: 2 / 1; border-radius: 7px 0 0 7px; background: #a259ff; }
+.car-hifi-figma-mark i:nth-child(4) { grid-area: 2 / 2; border-radius: 50%; background: #1abcfe; }
+.car-hifi-figma-mark i:nth-child(5) { grid-area: 3 / 1; border-radius: 7px 0 7px 7px; background: #0acf83; }
+
+.car-hifi-link-arrow {
+  color: var(--accent);
+  font-size: 18px;
+  transition: transform .22s ease-out;
+}
+
+.car-hifi-figma-link:hover,
+.car-hifi-figma-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--ink);
+  box-shadow: 0 16px 30px rgba(29, 29, 31, .16);
+}
+
+.car-hifi-figma-link:hover .car-hifi-link-arrow,
+.car-hifi-figma-link:focus-visible .car-hifi-link-arrow { transform: translate(2px, -2px); }
+
+.car-hifi-card {
+  padding: 18px;
+  background: #fff;
+  box-shadow: 0 12px 34px rgba(29, 29, 31, .06);
+}
+
 .car-lofi-strip-heading {
   margin-top: 72px;
   display: flex;
@@ -1488,10 +1558,13 @@
   .car-flow-rationale > b { transform: rotate(90deg); transform-origin: center; }
   .car-flow-scroll { margin-right: -24px; padding-right: 24px; }
   .car-lofi-designs { padding: 92px 0; }
+  .car-hifi-designs { padding: 92px 0; }
   .car-lofi-strip-heading { margin-top: 52px; }
   .car-lofi-carousel + .car-lofi-strip-heading { margin-top: 72px; }
   .car-lofi-strip-heading h3 { font-size: 25px; }
   .car-lofi-controls button { width: 44px; height: 44px; }
+  .car-hifi-footer { margin-top: 20px; justify-content: flex-start; }
+  .car-hifi-figma-link { font-size: 13px; }
   .car-lofi-carousel { margin-top: 20px; padding: 0 16px 18px; scroll-padding-inline: 16px; }
   .car-lofi-list { gap: 14px; }
   .car-lofi-slide { flex-basis: calc(100vw - 54px); width: calc(100vw - 54px); }
