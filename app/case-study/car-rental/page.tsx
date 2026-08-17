@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import PortfolioFooter from "../../components/PortfolioFooter";
 import { HiFiCarousel } from "./HiFiCarousel";
 import { LoFiCarousel } from "./LoFiCarousel";
 import { PersonaCarousel } from "./PersonaCarousel";
@@ -151,7 +152,7 @@ function FlowArrow({ label, down = false }: { label?: string; down?: boolean }) 
 
 export default function CarRentalCaseStudyPage() {
   return (
-    <main className="car-case-study-page">
+    <main className="car-case-study-page" id="top">
       <header className="car-case-study-header">
         <div className="car-case-study-shell car-case-study-header-inner">
           <Link className="car-case-study-brand" href="/" aria-label="Aamir Khan portfolio home">
@@ -614,6 +615,8 @@ export default function CarRentalCaseStudyPage() {
           <HiFiCarousel />
         </div>
       </section>
+
+      <PortfolioFooter />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTheme } from "./components/ThemeProvider";
 import PortfolioFooter from "./components/PortfolioFooter";
 
@@ -23,8 +24,24 @@ const projects = [
     actionLabel: "Read case study",
   },
   {
-    id: "bidvora",
+    id: "northside",
     number: "02",
+    name: "Northside Rentals",
+    title: "Car Rental Booking Platform",
+    platform: "App / Web",
+    role: "Product design · Booking experience",
+    tags: ["Mobility", "B2C", "Booking", "Responsive", "UX/UI"],
+    categories: ["UX/UI", "Marketing"],
+    description:
+      "A calm, responsive booking experience that helps customers choose the right vehicle and complete a reservation with confidence.",
+    problem: "Rental choices, pricing and add-ons can make a simple booking feel unnecessarily complex.",
+    outcome: "A clearer comparison and checkout flow designed to reduce uncertainty at every decision point.",
+    visual: "rental",
+    caseStudy: "/case-study/car-rental",
+  },
+  {
+    id: "bidvora",
+    number: "03",
     name: "Bidvora",
     title: "AI-powered Bid Platform",
     platform: "Web",
@@ -39,22 +56,6 @@ const projects = [
     caseStudy: "https://www.bidvora.app/",
     actionLabel: "View live demo",
     actionExternal: true,
-  },
-  {
-    id: "northside",
-    number: "03",
-    name: "Northside Rentals",
-    title: "Car Rental Booking Platform",
-    platform: "App / Web",
-    role: "Product design · Booking experience",
-    tags: ["Mobility", "B2C", "Booking", "Responsive", "UX/UI"],
-    categories: ["UX/UI", "Marketing"],
-    description:
-      "A calm, responsive booking experience that helps customers choose the right vehicle and complete a reservation with confidence.",
-    problem: "Rental choices, pricing and add-ons can make a simple booking feel unnecessarily complex.",
-    outcome: "A clearer comparison and checkout flow designed to reduce uncertainty at every decision point.",
-    visual: "rental",
-    caseStudy: "/case-study/car-rental",
   },
   {
     id: "recrugo",
@@ -153,12 +154,22 @@ const capabilities = [
   ["Collaboration", "Technical collaboration", "Design–engineering handoff", "Frontend understanding", "Stakeholder alignment"],
 ];
 
+const technicalSkillGroups = [
+  ["UI Design Tools", ["Figma", "Photoshop", "Illustrator", "Miro", "Framer", "Sketch"]],
+  ["AI & Emerging Technologies", ["ChatGPT", "Claude", "Claude Design", "Google Stitch", "Gemini", "Cursor AI", "GitHub Copilot", "Prompt Engineering", "AI Feature Ideation", "Human-AI Interaction", "Conversational UX"]],
+  ["Media Design Tools", ["Adobe InDesign", "CorelDRAW", "Adobe Premiere Pro", "Canva"]],
+  ["Frontend Technologies", ["HTML", "CSS", "JavaScript", "React", "TypeScript", "Bootstrap", "Tailwind CSS", "REST API Integration"]],
+  ["Domain Skills", ["User Experience (UX) Design", "User Interface (UI) Design", "User-Centered Design", "Design Thinking", "Usability Testing", "User Research", "Mobile App Design", "Prototyping", "Wireframing", "Web Design", "Branding", "Marketing", "Product Design", "Digital Media Design", "Print Media Design", "Packaging"]],
+];
+
 const experienceRoles = [
   "Lead Product Designer (UX/UI)",
   "UX Team Lead",
   "Sr. UX Developer",
   "Project Engineer",
 ];
+
+const experienceDates = ["2025 - Present", "2019 - 2025", "2014 - 2019", "2014"];
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -183,11 +194,7 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
         )}
         {type === "recruit" && (
           <div className="recruit-ui">
-            <header><b>recrugo</b><span>Candidate review</span><i>A</i></header>
-            <div className="candidate-layout">
-              <aside><small>SHORTLIST</small>{["Maya Patel", "Leo Bernard", "Sara Khan", "Noah Evans"].map((person, i) => <div className={i === 0 ? "active" : ""} key={person}><i>{person[0]}</i><span>{person}<small>Product Designer</small></span><em>{92 - i * 5}</em></div>)}</aside>
-              <main><small>CANDIDATE SIGNAL</small><div className="score-ring"><b>92</b><span>Strong fit</span></div><div className="signal-bars"><i /><i /><i /></div><p>Relevant systems thinking and cross-functional leadership across complex products.</p></main>
-            </div>
+            <Image src="/images/projects/recrugo-organization-comparison.png" alt="" width={1840} height={856} sizes="(max-width: 900px) 100vw, 50vw" />
           </div>
         )}
         {type === "services" && (
@@ -393,7 +400,7 @@ export default function Home() {
       </section>
 
       <section className="tech-section reveal" aria-labelledby="tech-title">
-        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><p className="tech-list">React <i>·</i> Next.js <i>·</i> TypeScript <i>·</i> JavaScript <i>·</i> HTML <i>·</i> CSS <i>·</i> Tailwind <i>·</i> Git <i>·</i> Figma <i>·</i> Adobe Creative Suite <i>·</i> CorelDRAW</p></div></div>
+        <div className="section-shell tech-layout"><div><span className="eyebrow">Technical collaboration</span><h2 id="tech-title">Design meets<br />technology<span className="accent-dot">.</span></h2></div><div className="tech-copy"><p>With a background in computer science and hands-on experience with modern frontend technologies, I collaborate closely with engineers to design experiences that are not only beautiful, but practical to build.</p><div className="tech-skill-groups">{technicalSkillGroups.map(([title, items]) => <section key={title}><h3>{title as string}</h3><p>{(items as string[]).join(", ")}</p></section>)}</div></div></div>
       </section>
 
       <section className="experience section-shell reveal" id="experience" aria-labelledby="experience-title">
@@ -404,6 +411,7 @@ export default function Home() {
               <div className="experience-number">{String(index + 1).padStart(2, "0")}</div>
               <div><h3>{role}</h3></div>
               <p className="experience-copy">Core Techies India</p>
+              <p className="experience-date">{experienceDates[index]}</p>
               <span className={`experience-tag ${index === 0 ? "is-current" : ""}`}>{index === 0 ? "Current role" : "Previous role"}</span>
             </article>
           ))}
