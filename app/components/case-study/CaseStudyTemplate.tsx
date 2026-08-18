@@ -26,6 +26,7 @@ function Visual({ visual, className = "" }: { visual: CaseStudyVisual; className
 
 export default function CaseStudyTemplate({ project }: { project: CaseStudy }) {
   const caseStyle = { "--case-accent": project.accent } as CSSProperties;
+  const isMedicineReminder = project.slug === "medicine-reminder";
 
   return (
     <main className="case-study-page" id="top" style={caseStyle}>
@@ -49,11 +50,13 @@ export default function CaseStudyTemplate({ project }: { project: CaseStudy }) {
           </dl>
           <Visual visual={project.hero} className="cs-hero-visual" />
           <div className="cs-hero-actions">
-            <a href="#overview">Read the story <span aria-hidden="true">↓</span></a>
+            {!isMedicineReminder && <a href="#overview">Read the story <span aria-hidden="true">↓</span></a>}
             {project.sourcePdf && <a href={project.sourcePdf} target="_blank" rel="noreferrer">View original PDF <span aria-hidden="true">↗</span></a>}
           </div>
         </section>
 
+        {!isMedicineReminder && (
+          <>
         <nav className="cs-story-nav" aria-label="Case study sections">
           <div className="cs-shell">
             {(project.navigation ?? ["Overview", "Problem", "Discovery", "Decisions", "Validation", "Solution", "Outcome"].map(label => ({ label, href: `#${label.toLowerCase()}` }))).map(item => <a key={item.label} href={item.href}>{item.label}</a>)}
@@ -183,6 +186,8 @@ export default function CaseStudyTemplate({ project }: { project: CaseStudy }) {
         <section className="cs-portfolio-return cs-shell">
           <Link className="button button-primary button-large" href="/#work">Back to portfolio <span aria-hidden="true">↗</span></Link>
         </section>
+          </>
+        )}
       </article>
       <PortfolioFooter />
     </main>
