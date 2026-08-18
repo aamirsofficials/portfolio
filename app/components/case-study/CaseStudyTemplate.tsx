@@ -25,11 +25,17 @@ function Visual({ visual, className = "" }: { visual: CaseStudyVisual; className
 }
 
 export default function CaseStudyTemplate({ project }: { project: CaseStudy }) {
-  const caseStyle = { "--case-accent": project.accent } as CSSProperties;
   const isMedicineReminder = project.slug === "medicine-reminder";
+  const caseStyle = {
+    "--case-accent": isMedicineReminder ? "var(--accent)" : project.accent,
+  } as CSSProperties;
 
   return (
-    <main className="case-study-page" id="top" style={caseStyle}>
+    <main
+      className={`case-study-page${isMedicineReminder ? " medicine-reminder-case-study" : ""}`}
+      id="top"
+      style={caseStyle}
+    >
       <header className="cs-nav">
         <Link className="cs-brand" href="/" aria-label="Aamir Khan portfolio home">
           <span><Image className="brand-logo-light" src="/logo-icon-black.svg" alt="" width={30} height={30} /><Image className="brand-logo-dark" src="/logo-icon-white.svg" alt="" width={30} height={30} /></span>

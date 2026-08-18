@@ -266,3 +266,45 @@
 @media (prefers-reduced-motion: reduce) {
   .case-study-page *, .case-study-page *::before, .case-study-page *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Match the medicine reminder hero typography and color treatment to the
+   car rental case study without changing the shared case-study layout. */
+.medicine-reminder-case-study .cs-kicker {
+  color: var(--case-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.medicine-reminder-case-study .cs-hero h1 {
+  max-width: 650px;
+  margin-top: 34px;
+  color: var(--ink);
+  font-size: clamp(44px, 4.65vw, 60px);
+  font-weight: 650;
+  line-height: 0.99;
+  letter-spacing: -0.058em;
+}
+
+.medicine-reminder-case-study .cs-proposition {
+  max-width: 660px;
+  margin-top: 48px;
+  color: var(--muted);
+  font-size: clamp(19px, 2vw, 28px);
+  line-height: 1.48;
+  letter-spacing: -0.027em;
+}
+
+.medicine-reminder-case-study .cs-meta dt {
+  color: var(--case-accent);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+}
+
+.medicine-reminder-case-study .cs-meta dd {
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.55;
+}

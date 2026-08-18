@@ -449,8 +449,13 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className={`projects ${displayedProjectTab === "Logos" ? "logo-projects" : ""} ${projectsChanging ? "is-changing" : ""}`} key={displayedProjectTab} id="project-panel" role="tabpanel" aria-labelledby={`project-tab-${activeProjectTab.toLowerCase().replace(/[^a-z]+/g, "-")}`} ref={projectsRef} tabIndex={0}>
-          {displayedProjectTab === "Logos" ? logos.map((logo, index) => logo.detailImage ? (
+        <div className={`projects ${displayedProjectTab === "Logos" ? "logo-projects" : ""} ${displayedProjectTab === "Marketing" ? "marketing-projects" : ""} ${projectsChanging ? "is-changing" : ""}`} key={displayedProjectTab} id="project-panel" role="tabpanel" aria-labelledby={`project-tab-${activeProjectTab.toLowerCase().replace(/[^a-z]+/g, "-")}`} ref={projectsRef} tabIndex={0}>
+          {displayedProjectTab === "Marketing" ? (
+            <article className="marketing-coming-soon reveal">
+              <h3>Coming Soon.</h3>
+              <p>More work is on the way.</p>
+            </article>
+          ) : displayedProjectTab === "Logos" ? logos.map((logo, index) => logo.detailImage ? (
             <button className="logo-card logo-card-button reveal" type="button" key={logo.name} aria-label={`View ${logo.name} logo details`} style={{ animationDelay: `${Math.min(index, 5) * 45}ms` }} onClick={() => setSelectedLogo(logo)}>
               <div className="logo-image-frame">
                 <img src={logo.src} alt={`${logo.name} logo`} className="logo-image" draggable={false} />
@@ -494,10 +499,12 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <div className="project-controls section-shell" aria-label="Project carousel controls">
-          <button type="button" onClick={() => scrollProjects(-1)} aria-label="Previous project" disabled={visibleItemCount < 2}>←</button>
-          <button type="button" onClick={() => scrollProjects(1)} aria-label="Next project" disabled={visibleItemCount < 2}>→</button>
-        </div>
+        {displayedProjectTab !== "Marketing" && (
+          <div className="project-controls section-shell" aria-label="Project carousel controls">
+            <button type="button" onClick={() => scrollProjects(-1)} aria-label="Previous project" disabled={visibleItemCount < 2}>←</button>
+            <button type="button" onClick={() => scrollProjects(1)} aria-label="Next project" disabled={visibleItemCount < 2}>→</button>
+          </div>
+        )}
       </section>
 
       {selectedLogo?.detailImage && (

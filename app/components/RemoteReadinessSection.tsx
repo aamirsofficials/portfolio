@@ -59,7 +59,7 @@ export function RemoteReadinessSection() {
       <div className="section-shell">
         <div className="remote-readiness-heading">
           <span className="eyebrow">Remote ready</span>
-          <h2 id="remote-readiness-title">Why I&apos;m suited for Remote / Hybrid mode<span className="accent-dot">.</span></h2>
+        <h2 id="remote-readiness-title">Built to Collaborate, Wherever the Team Works<span className="accent-dot">.</span></h2>
           <p>I have the right environment, tools, and setup to deliver high-quality work consistently—no matter where I work from.</p>
         </div>
         <div className="remote-readiness-grid">

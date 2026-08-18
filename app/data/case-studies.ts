@@ -116,7 +116,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       { label: "Role", value: "UX Designer" },
       { label: "Timeline", value: "Oct–Nov 2022" },
       { label: "Team", value: "Independent UX project · peer feedback" },
-      { label: "Platform", value: "Mobile · Tablet · Desktop" },
+      { label: "Platform", value: "Mobile · Tablet" },
       { label: "Contribution", value: "Research · Wireframing · UI · Prototyping · Usability study" },
     ],
     answers: [

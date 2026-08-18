@@ -157,6 +157,44 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .projects { display: flex; gap: 34px; padding: 0 max(32px, calc((100vw - 1240px) / 2)) 26px; overflow-x: auto; scroll-padding-inline: max(32px, calc((100vw - 1240px) / 2)); scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; scrollbar-width: none; transition: opacity .18s ease, transform .18s ease, filter .18s ease; }
 .projects.is-changing { opacity: 0; transform: translateY(10px); filter: blur(2px); }
 .projects::-webkit-scrollbar { display: none; }
+
+.marketing-projects {
+  min-height: 360px;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+.marketing-coming-soon {
+  flex: 0 1 600px;
+  width: min(600px, calc(100vw - 64px));
+  min-height: 280px;
+  padding: 48px;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  border-radius: 22px;
+  background: var(--project-card);
+  box-shadow: 0 24px 70px var(--project-shadow);
+  text-align: center;
+}
+
+.marketing-coming-soon h3 {
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(40px, 5vw, 62px);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+
+.marketing-coming-soon p {
+  margin: 0;
+  color: var(--project-muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
 .project { flex: 0 0 min(1240px, calc(100vw - 64px)); width: min(1240px, calc(100vw - 64px)); display: flex; overflow: hidden; scroll-snap-align: center; animation: lineup-card-enter .56s cubic-bezier(.22,1,.36,1) both; }
 .project:nth-child(2) { animation-delay: 45ms; }
 .project:nth-child(3) { animation-delay: 90ms; }
