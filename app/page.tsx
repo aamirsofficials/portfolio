@@ -230,11 +230,16 @@ function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
-function ProjectVisual({ type, name }: { type: string; name: string }) {
+function ProjectVisual({ type, name, id }: { type: string; name: string; id?: string }) {
   return (
     <div className={`project-visual visual-${type}`} role="img" aria-label={`${name} product interface preview`}>
       <div className="browser-shell">
         <div className="browser-top"><i /><i /><i /><span /></div>
+        {id === "recrugo-brand" && (
+          <div className="branding-logo">
+            <img src="/images/branding/recrugo/frame-02.jpg" alt="Recrugo brand mockup" />
+          </div>
+        )}
         {type === "bid" && (
           <div className="bid-ui"><div className="bid-dashboard" /></div>
         )}
@@ -247,7 +252,7 @@ function ProjectVisual({ type, name }: { type: string; name: string }) {
             <div className="rental-phone rental-phone-results"><div className="rental-screen rental-screen-results" /></div>
           </div>
         )}
-        {type === "recruit" && (
+        {type === "recruit" && id !== "recrugo-brand" && (
           <div className="recruit-ui">
             <Image src="/images/projects/recrugo-organization-comparison.png" alt="" width={1840} height={856} sizes="(max-width: 900px) 100vw, 50vw" />
           </div>
@@ -494,7 +499,7 @@ export default function Home() {
                     </details>
                   )}
                 </div>
-                <ProjectVisual type={project.visual} name={project.name} />
+                <ProjectVisual type={project.visual} name={project.name} id={project.id} />
               </div>
             </article>
           ))}

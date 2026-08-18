@@ -27,6 +27,9 @@
   --project-accent: #b9632d;
   --project-shadow: rgba(29, 29, 31, .1);
   --project-preview-shadow: rgba(29, 29, 31, .2);
+  --recruit-bg-start: #f6fff7;
+  --recruit-bg-end: #eefcf0;
+  --recruit-shell-bg: #ffffff;
   --process-bg: #1d1d1f;
   --process-fg: #fbfbf9;
   --work-bg: rgb(245, 245, 247);
@@ -54,6 +57,9 @@
   --project-accent: #f2a766;
   --project-shadow: rgba(0, 0, 0, .12);
   --project-preview-shadow: rgba(0, 0, 0, .38);
+  --recruit-bg-start: #071721;
+  --recruit-bg-end: #12232d;
+  --recruit-shell-bg: #07111a;
   --process-bg: #151517;
   --process-fg: #f5f5f2;
   --work-bg: var(--paper);
@@ -284,10 +290,33 @@ html.theme-transitioning *, html.theme-transitioning *::before, html.theme-trans
 .rental-screen-home { background-image: url("/images/projects/northside-home.png"); }
 .rental-screen-results { background-image: url("/images/projects/northside-search-results.png"); }
 
-.visual-recruit { background: linear-gradient(145deg, #071721 0%, #12232d 100%); }
-.visual-recruit .browser-shell { height: auto; aspect-ratio: auto; background: #07111a; }
-.recruit-ui { background: #07111a; }
+.visual-recruit { background: linear-gradient(145deg, var(--recruit-bg-start) 0%, var(--recruit-bg-end) 100%); }
+.visual-recruit .browser-shell { height: auto; aspect-ratio: auto; background: var(--recruit-shell-bg); }
+.recruit-ui { background: var(--recruit-shell-bg); }
 .recruit-ui img { width: 100%; height: auto; display: block; }
+
+/* Specific styling for the Recrugo branding card mockup: center logo and ensure white mockup background */
+#project-recrugo-brand .browser-shell {
+  background: #fff;
+}
+
+/* Keep browser chrome visible and place mockup below it */
+#project-recrugo-brand .branding-logo {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#project-recrugo-brand .branding-logo img {
+  max-width: 88%;
+  max-height: 88%;
+  object-fit: contain;
+  display: block;
+}
 
 .visual-services { padding-block: 25px; background: linear-gradient(145deg, #ffe8ea 0%, #f8f3f3 48%, #eef1f5 100%); }
 .visual-services .browser-shell { width: 100%; height: 100%; aspect-ratio: auto; border: 0; border-radius: 0; background: transparent; box-shadow: none; overflow: visible; transform: none; transition: none; }
